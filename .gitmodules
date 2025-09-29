@@ -1,0 +1,3 @@
+[submodule "huwan.org/themes/hugo-bearblog"]
+	path = huwan.org/themes/hugo-bearblog
+	url = https://github.com/janraasch/hugo-bearblog.git
