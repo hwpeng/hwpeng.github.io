@@ -1,0 +1,7 @@
+baseURL = "https://hwpeng.github.io/"
+theme = "hugo-bearblog"
+
+title = 'Huwan Peng — HwP: Hardware Programmer'
+author = "Huwan Peng"
+copyright = "Copyright © 2025, Huwan Peng."
+languageCode = "en-US"
