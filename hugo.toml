@@ -1,5 +1,5 @@
 baseURL = "https://hwpeng.github.io/"
-theme = "hugo-bearblog"
+theme = ["xmin"]
 
 title = 'Huwan Peng — HwP: Hardware Programmer'
 author = "Huwan Peng"
