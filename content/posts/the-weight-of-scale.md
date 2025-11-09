@@ -1,6 +1,5 @@
 ---
 title: The Weight of Scale
-author: Huwan Peng
 date: '2025-10-03'
 ---
 
