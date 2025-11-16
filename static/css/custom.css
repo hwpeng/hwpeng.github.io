@@ -1,0 +1,28 @@
+/* Override menu alignment to left-align navigation buttons */
+.menu {
+  text-align: left;
+}
+
+/* Override article meta styling to left-align blog post titles and remove grey background */
+.article-meta {
+  text-align: left;
+  background: none;
+  padding: 0; /* Remove the 5px padding from theme */
+  margin-bottom: 1.5em;
+}
+
+/* Reset title margins for perfect alignment */
+.article-meta h1 {
+  margin-top: 0;
+  margin-bottom: 0.2em;
+}
+
+/* Style the date/time with smaller font, remove bold, and use a different font */
+.article-meta .date {
+  font-weight: normal;
+  font-size: 1.0em;
+  font-family: Georgia, serif;
+  color: #666;
+  margin-top: 0;
+  margin-bottom: 0;
+}

@@ -1,7 +1,17 @@
 baseURL = "https://hwpeng.github.io/"
 theme = ["xmin"]
 
-title = 'Huwan Peng — HwP: Hardware Programmer'
+title = ' HwP: Hardware Programmer'
 author = "Huwan Peng"
 copyright = "Copyright © 2025, Huwan Peng."
 languageCode = "en-US"
+
+[menu]
+  [[menu.main]]
+    name = "Home"
+    url = "/"
+    weight = 1
+  [[menu.main]]
+    name = "Blog"
+    url = "/blog/"
+    weight = 2

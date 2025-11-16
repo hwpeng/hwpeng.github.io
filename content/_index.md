@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Huwan Peng"
 ---
 
 # Huwan Peng
@@ -24,4 +24,4 @@ Outside of work, I'm passionate about races that test the limits of endurance, s
 
 Whether you're interested in AI hardware or endurance sports, I'd love to connect.
 
-## Posts
+## Blog
