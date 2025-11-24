@@ -1,7 +1,13 @@
 ---
-title: "Example Draft Note"
-date: 2025-11-22
+title: "To Note"
+date: 2025-11-23
 ---
+
+- MTIA specs and features
+- CUDA learning
+- Inter-device communication
+- whats new every week
+
 
 ## Example Draft Note
 
