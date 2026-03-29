@@ -8,7 +8,7 @@ title: "Huwan Peng"
 
 hwpeng20 at gmail dot com
 
-[LinkedIn](https://www.linkedin.com/in/huwan-peng-7aa21b10b/) &middot; [Google Scholar](https://scholar.google.com/citations?user=rMof9c4AAAAJ&hl=en) &middot; [Strava](https://www.strava.com/athletes/107203496)
+[LinkedIn](https://www.linkedin.com/in/huwan-peng-7aa21b10b/) &middot; [Google Scholar](https://scholar.google.com/citations?user=mYgyRtAAAAAJ&hl=en&oi=ao) &middot; [Strava](https://www.strava.com/athletes/107203496)
 
 ---
 
