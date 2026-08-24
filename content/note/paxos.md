@@ -1,7 +1,7 @@
 ---
 title: "Paxos: Distributed Consensus"
 date: 2025-11-30
-area: "Systems"
+area: "Systems & Other Tech"
 summary: "A working explanation of consensus, quorum intersection, and the safety rules behind Paxos."
 ---
 

@@ -2,17 +2,17 @@
 
 <div class="knowledge-shell">
   <aside class="knowledge-sidebar" aria-label="Knowledge library navigation">
-    <a class="library-home" href="{{ .CurrentSection.RelPermalink }}">← Knowledge Library</a>
-    {{ range (.CurrentSection.Pages.GroupByParam "area") }}
+    <a class="library-home" href="{{ .CurrentSection.RelPermalink }}">← {{ if eq .Params.area "AI Architecture" }}AI Architecture map{{ else }}Knowledge Library{{ end }}</a>
+    {{ $currentArea := .Params.area }}
+    {{ $areaPages := where .CurrentSection.Pages "Params.area" $currentArea }}
     <div class="sidebar-group">
-      <p>{{ .Key | default "Unsorted" }}</p>
+      <p>{{ $currentArea | default "Notes" }}</p>
       <ul>
-        {{ range .Pages.ByTitle }}
+        {{ range $areaPages.ByTitle }}
         <li><a{{ if eq .RelPermalink $.RelPermalink }} class="active" aria-current="page"{{ end }} href="{{ .RelPermalink }}">{{ .Title }}</a></li>
         {{ end }}
       </ul>
     </div>
-    {{ end }}
   </aside>
 
   <article class="knowledge-note">

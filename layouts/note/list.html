@@ -1,25 +1,70 @@
 {{ partial "header.html" . }}
 
 <header class="library-header">
-  <p class="eyebrow">Personal Wiki</p>
   <h1>{{ .Title }}</h1>
-  <div class="library-intro">{{ .Content }}</div>
 </header>
 
-<div class="library-groups">
-  {{ range (.Pages.GroupByParam "area") }}
-  <section class="library-group">
-    <h2>{{ .Key | default "Unsorted" }}</h2>
-    <div class="note-grid">
-      {{ range .Pages.ByTitle }}
-      <a class="note-card" href="{{ .RelPermalink }}">
-        <span class="note-title">{{ .Title | markdownify }}</span>
-        {{ with .Params.summary }}<span class="note-summary">{{ . }}</span>{{ end }}
-      </a>
-      {{ end }}
-    </div>
-  </section>
-  {{ end }}
-</div>
+<main class="ai-directory">
+  {{ $sections := .Site.Data.field_manual.sections }}
+  <div class="manual-phases" aria-label="Learning phases">
+    <a href="#foundations"><small>Phase I · 01–06</small><strong>Frame the problem and design the node</strong></a>
+    <a href="#interconnect"><small>Phase II · 07–10</small><strong>Scale and operate the software system</strong></a>
+    <a href="#packaging-vlsi"><small>Phase III · 11–14</small><strong>Build the physical platform and place bets</strong></a>
+  </div>
+
+  <nav class="manual-toc" aria-label="Field manual sections">
+    {{ range $sections }}
+    <a href="#{{ .id }}"><span>{{ .number }}</span><strong>{{ .title }}</strong></a>
+    {{ end }}
+  </nav>
+
+  <div class="curriculum-sections">
+    {{ range $sections }}
+    <section class="curriculum-section" id="{{ .id }}">
+      <header class="curriculum-section-header">
+        <span class="section-number">{{ .number }}</span>
+        <div>
+          <h2>{{ .title }}</h2>
+          <p>{{ .summary }}</p>
+        </div>
+        <p class="section-prerequisites"><small>Builds on</small>{{ .prerequisites }}</p>
+      </header>
+
+      <div class="curriculum-groups">
+        {{ range .groups }}
+        <section class="curriculum-group">
+          <h3>{{ .title }}</h3>
+          {{ range .topics }}
+          {{ $topic := . }}
+          <article class="curriculum-topic{{ with .href }} curriculum-topic-available{{ end }}">
+            <div class="curriculum-topic-heading">
+              {{ with .href }}<a href="{{ . }}">{{ $topic.title }}</a>{{ else }}<span>{{ $topic.title }}</span>{{ end }}
+              {{ with .status }}<small class="topic-status">{{ . }}</small>{{ end }}
+            </div>
+            <p>{{ .why }}</p>
+          </article>
+          {{ end }}
+        </section>
+        {{ end }}
+      </div>
+    </section>
+    {{ end }}
+  </div>
+</main>
+
+{{ $other := where .Pages "Params.area" "ne" "AI Architecture" }}
+{{ with $other }}
+<section class="other-notes">
+  <h2>Other Notes</h2>
+  <div class="other-note-list">
+    {{ range .ByTitle }}
+    <a href="{{ .RelPermalink }}">
+      <span>{{ .Title | markdownify }}</span>
+      <small>{{ .Params.area | default "Note" }}</small>
+    </a>
+    {{ end }}
+  </div>
+</section>
+{{ end }}
 
 {{ partial "footer.html" . }}

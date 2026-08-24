@@ -174,7 +174,7 @@ body:has(.knowledge-shell) {
 
 .library-header {
   max-width: 680px;
-  margin-bottom: 4rem;
+  margin-bottom: 2.25rem;
 }
 
 .library-header h1 {
@@ -186,52 +186,283 @@ body:has(.knowledge-shell) {
   font-size: 1.08rem;
 }
 
-.library-groups {
-  display: grid;
-  gap: 3.5rem;
+.ai-directory {
+  margin-top: 1rem;
 }
 
-.library-group h2 {
-  margin: 0 0 1rem;
-  padding-bottom: 0.65rem;
+.manual-phases {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 1.5rem 0 1rem;
+  border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
 }
 
-.note-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.8rem;
-}
-
-.note-card {
+.manual-phases a {
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
-  min-height: 8.5rem;
-  padding: 1.2rem;
+  gap: 0.22rem;
+  padding: 0.85rem 1rem 0.9rem 0;
   color: var(--ink);
-  background: rgba(255, 255, 255, 0.4);
-  border: 1px solid var(--line);
-  border-radius: 0.8rem;
   text-decoration: none;
-  transition: border-color 160ms ease, transform 160ms ease;
+  transition: color 140ms ease, background 140ms ease;
 }
 
-.note-card:hover {
-  border-color: #a8b9b2;
-  transform: translateY(-2px);
+.manual-phases a + a {
+  padding-left: 1rem;
+  border-left: 1px solid var(--line);
 }
 
-.note-title {
-  font-size: 1.05rem;
+.manual-phases a:hover {
+  color: var(--accent);
+  background: rgba(229, 238, 240, 0.35);
+}
+
+.manual-phases small {
+  color: var(--accent);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.manual-phases strong {
+  font-size: 0.82rem;
+  line-height: 1.35;
+}
+
+.manual-toc {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-bottom: 5rem;
+  border-top: 1px solid var(--line);
+}
+
+.manual-toc a {
+  display: grid;
+  grid-template-columns: 2rem minmax(0, 1fr);
+  gap: 0.25rem;
+  padding: 0.58rem 0.75rem 0.58rem 0;
+  color: var(--muted);
+  border-bottom: 1px solid var(--line);
+  text-decoration: none;
+}
+
+.manual-toc a:nth-child(even) {
+  padding-left: 0.75rem;
+  border-left: 1px solid var(--line);
+}
+
+.manual-toc a:hover {
+  color: var(--accent);
+  background: rgba(229, 238, 240, 0.35);
+}
+
+.manual-toc span {
+  color: var(--accent);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.65rem;
+  font-weight: 700;
+}
+
+.manual-toc strong {
+  font-size: 0.8rem;
+  line-height: 1.35;
+}
+
+.curriculum-sections {
+  display: grid;
+  gap: 5.5rem;
+}
+
+.curriculum-section {
+  scroll-margin-top: 1.5rem;
+}
+
+.curriculum-section-header {
+  display: grid;
+  grid-template-columns: 2.75rem minmax(0, 1fr) 155px;
+  gap: 1rem;
+  align-items: start;
+  margin-bottom: 1.4rem;
+  padding-bottom: 1.15rem;
+  border-bottom: 2px solid var(--ink);
+}
+
+.section-number {
+  padding-top: 0.2rem;
+  color: var(--accent);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.curriculum-section-header h2 {
+  margin: 0 0 0.3rem;
+  font-size: clamp(1.55rem, 4vw, 2.2rem);
+}
+
+.curriculum-section-header div > p {
+  max-width: 650px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.section-prerequisites {
+  margin: 0;
+  color: var(--muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.65rem;
+  line-height: 1.45;
+}
+
+.section-prerequisites small {
+  display: block;
+  margin-bottom: 0.18rem;
+  color: var(--accent);
+  font-size: 0.56rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.curriculum-groups {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem 2.25rem;
+}
+
+.curriculum-group h3 {
+  margin: 0 0 0.35rem;
+  color: var(--accent);
+  font-size: 0.72rem;
+  letter-spacing: 0.055em;
+  text-transform: uppercase;
+}
+
+.curriculum-topic {
+  padding: 0.75rem 0 0.8rem;
+  border-top: 1px solid var(--line);
+}
+
+.curriculum-topic-heading {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.45rem;
+}
+
+.curriculum-topic-heading > span:first-child,
+.curriculum-topic-heading > a:first-child {
+  flex: 1 1 auto;
+  color: #818781;
+  font-size: 0.88rem;
   font-weight: 700;
   line-height: 1.35;
 }
 
-.note-summary {
-  color: var(--muted);
-  font-size: 0.9rem;
+.curriculum-topic-heading > a:first-child {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.curriculum-topic-heading > a:first-child:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.curriculum-topic > p {
+  margin: 0.32rem 0 0;
+  color: #9a9f99;
+  font-size: 0.74rem;
   line-height: 1.5;
+}
+
+.curriculum-topic-available {
+  margin: 0 -0.55rem;
+  padding-right: 0.55rem;
+  padding-left: 0.55rem;
+  background: rgba(229, 238, 240, 0.48);
+  border-top-color: #b8cbc6;
+  border-radius: 0.45rem;
+}
+
+.curriculum-topic-available > p {
+  color: #66716a;
+}
+
+.topic-status {
+  flex: 0 0 auto;
+  padding-top: 0.12rem;
+  color: var(--accent);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.56rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.other-notes {
+  margin-top: 4.75rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--line);
+}
+
+.other-notes > h2 {
+  margin: 0 0 0.8rem;
+  font-size: 1.35rem;
+}
+
+.other-notes-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: 0.8rem;
+}
+
+.other-notes-heading h2 {
+  margin: 0;
+  font-size: 1.35rem;
+}
+
+.other-notes-heading p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.other-note-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-top: 1px solid var(--line);
+}
+
+.other-note-list a {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0.8rem 1rem 0.8rem 0;
+  color: var(--ink);
+  border-bottom: 1px solid var(--line);
+  text-decoration: none;
+}
+
+.other-note-list a:hover span {
+  color: var(--accent);
+}
+
+.other-note-list span {
+  font-size: 0.86rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.other-note-list small {
+  color: var(--muted);
+  font-size: 0.66rem;
 }
 
 .knowledge-shell {
@@ -315,6 +546,53 @@ body:has(.knowledge-shell) {
   margin-top: 2.3rem;
 }
 
+.knowledge-note blockquote {
+  margin: 0 0 2.5rem;
+  padding: 1rem 1.2rem;
+  color: #34413a;
+  background: var(--accent-soft);
+  border-left: 3px solid var(--accent);
+}
+
+.knowledge-note blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+.knowledge-note table {
+  display: block;
+  width: 100%;
+  margin: 1.5rem 0 2rem;
+  overflow-x: auto;
+  border-collapse: collapse;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  font-size: 0.88rem;
+  line-height: 1.45;
+}
+
+.knowledge-note th,
+.knowledge-note td {
+  min-width: 8rem;
+  padding: 0.65rem 0.75rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+.knowledge-note thead,
+.knowledge-note tfoot,
+.knowledge-note tr:nth-child(even) {
+  background: rgba(229, 238, 240, 0.5);
+}
+
+.knowledge-note pre {
+  margin: 1.5rem 0 2rem;
+  padding: 1rem 1.2rem;
+  background: #eef0eb;
+  border: 1px solid var(--line);
+  border-radius: 0.55rem;
+  box-shadow: none;
+}
+
 ::selection {
   color: var(--ink);
   background: #cfe1e4;
@@ -339,7 +617,57 @@ body:has(.knowledge-shell) {
     width: min(72vw, 280px);
   }
 
-  .note-grid {
+  .library-header {
+    margin-bottom: 3rem;
+  }
+
+  .manual-phases,
+  .manual-toc,
+  .curriculum-groups {
+    grid-template-columns: 1fr;
+  }
+
+  .manual-phases a + a {
+    padding-left: 0;
+    border-top: 1px solid var(--line);
+    border-left: 0;
+  }
+
+  .manual-toc {
+    margin-bottom: 4rem;
+  }
+
+  .manual-toc a:nth-child(even) {
+    padding-left: 0;
+    border-left: 0;
+  }
+
+  .curriculum-sections {
+    gap: 4.5rem;
+  }
+
+  .curriculum-section-header {
+    grid-template-columns: 2rem minmax(0, 1fr);
+    gap: 0.75rem;
+  }
+
+  .section-prerequisites {
+    grid-column: 2;
+  }
+
+  .curriculum-groups {
+    gap: 1.4rem;
+  }
+
+  .other-notes-heading {
+    display: block;
+  }
+
+  .other-notes-heading p {
+    margin-top: 0.35rem;
+  }
+
+  .other-note-list {
     grid-template-columns: 1fr;
   }
 

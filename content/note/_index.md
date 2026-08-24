@@ -1,6 +1,8 @@
 ---
-title: "Knowledge Library"
+title: "AI System Architect’s Field Manual"
 menu: ""
+description: "A living curriculum for making AI architecture decisions—from workload and software to silicon and datacenter."
+aliases:
+  - "/note/work-to-note/"
+  - "/note/ai-architecture/"
 ---
-
-A growing collection of working notes on computing, hardware, and the machines that interest me. Each page is a Markdown file—written to be revised, connected, and expanded over time.
