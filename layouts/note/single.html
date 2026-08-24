@@ -1,0 +1,29 @@
+{{ partial "header.html" . }}
+
+<div class="knowledge-shell">
+  <aside class="knowledge-sidebar" aria-label="Knowledge library navigation">
+    <a class="library-home" href="{{ .CurrentSection.RelPermalink }}">← Knowledge Library</a>
+    {{ range (.CurrentSection.Pages.GroupByParam "area") }}
+    <div class="sidebar-group">
+      <p>{{ .Key | default "Unsorted" }}</p>
+      <ul>
+        {{ range .Pages.ByTitle }}
+        <li><a{{ if eq .RelPermalink $.RelPermalink }} class="active" aria-current="page"{{ end }} href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+        {{ end }}
+      </ul>
+    </div>
+    {{ end }}
+  </aside>
+
+  <article class="knowledge-note">
+    <header class="note-header">
+      <p class="eyebrow">{{ .Params.area | default "Note" }}</p>
+      <h1>{{ .Title | markdownify }}</h1>
+      {{ with .Params.summary }}<p>{{ . }}</p>{{ end }}
+    </header>
+    {{ partial "math.html" . }}
+    <main>{{ .Content }}</main>
+  </article>
+</div>
+
+{{ partial "footer.html" . }}

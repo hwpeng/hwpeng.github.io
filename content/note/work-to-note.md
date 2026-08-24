@@ -1,6 +1,8 @@
 ---
 title: "Work To Note"
 date: 2025-12-26
+area: "AI Architecture"
+summary: "A map of the hardware, software, and co-design topics behind modern AI systems."
 ---
 
 ## Hardware: Architecture & Systems

@@ -1,6 +1,8 @@
 ---
 title: "Paxos: Distributed Consensus"
 date: 2025-11-30
+area: "Systems"
+summary: "A working explanation of consensus, quorum intersection, and the safety rules behind Paxos."
 ---
 
 ## 1. The Problem: State Machine Replication

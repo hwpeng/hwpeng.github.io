@@ -1,6 +1,6 @@
 ---
-title: "Draft Note"
+title: "Knowledge Library"
 menu: ""
 ---
 
-This is a hidden section for draft note. It won't appear in the main navigation.
+A growing collection of working notes on computing, hardware, and the machines that interest me. Each page is a Markdown file—written to be revised, connected, and expanded over time.

@@ -1,6 +1,8 @@
 ---
 title: "保时捷 911 (992.1) Carrera 个性与驾驶风格"
 date: 2025-11-30
+area: "Cars & Racing"
+summary: "从后置后驱布局出发，理解 911 的车辆动态与驾驶方式。"
 ---
 
 **视频来源**：[保时捷 911 Carrera 992.1，他教会了我开车](https://www.youtube.com/watch?v=66sbchTWTGk)

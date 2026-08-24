@@ -1,0 +1,25 @@
+{{ partial "header.html" . }}
+
+<header class="library-header">
+  <p class="eyebrow">Personal Wiki</p>
+  <h1>{{ .Title }}</h1>
+  <div class="library-intro">{{ .Content }}</div>
+</header>
+
+<div class="library-groups">
+  {{ range (.Pages.GroupByParam "area") }}
+  <section class="library-group">
+    <h2>{{ .Key | default "Unsorted" }}</h2>
+    <div class="note-grid">
+      {{ range .Pages.ByTitle }}
+      <a class="note-card" href="{{ .RelPermalink }}">
+        <span class="note-title">{{ .Title | markdownify }}</span>
+        {{ with .Params.summary }}<span class="note-summary">{{ . }}</span>{{ end }}
+      </a>
+      {{ end }}
+    </div>
+  </section>
+  {{ end }}
+</div>
+
+{{ partial "footer.html" . }}
