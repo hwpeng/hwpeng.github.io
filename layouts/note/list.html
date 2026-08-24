@@ -5,11 +5,11 @@
 </header>
 
 <main class="ai-directory">
-  {{ $sections := .Site.Data.field_manual.sections }}
+  {{ $sections := sort .Site.Data.field_manual.sections "number" }}
   <div class="manual-phases" aria-label="Learning phases">
-    <a href="#foundations"><small>Phase I · 01–06</small><strong>Frame the problem and design the node</strong></a>
-    <a href="#interconnect"><small>Phase II · 07–10</small><strong>Scale and operate the software system</strong></a>
-    <a href="#packaging-vlsi"><small>Phase III · 11–14</small><strong>Build the physical platform and place bets</strong></a>
+    <a href="#foundations"><small>Phase I · 01–07</small><strong>Design the accelerator and its physical system</strong></a>
+    <a href="#software-stack"><small>Phase II · 08–11</small><strong>Turn hardware into a working AI system</strong></a>
+    <a href="#power-reliability"><small>Phase III · 12–14</small><strong>Operate the platform and place architecture bets</strong></a>
   </div>
 
   <nav class="manual-toc" aria-label="Field manual sections">
@@ -26,6 +26,7 @@
         <div>
           <h2>{{ .title }}</h2>
           <p>{{ .summary }}</p>
+          {{ with .as_of }}<small class="section-as-of">{{ . }}</small>{{ end }}
         </div>
         <p class="section-prerequisites"><small>Builds on</small>{{ .prerequisites }}</p>
       </header>
@@ -42,6 +43,8 @@
               {{ with .status }}<small class="topic-status">{{ . }}</small>{{ end }}
             </div>
             <p>{{ .why }}</p>
+            {{ with .prediction }}<p class="topic-prediction"><strong>Prediction</strong>{{ . }}</p>{{ end }}
+            {{ with .watch }}<p class="topic-watch"><strong>Watch</strong>{{ . }}</p>{{ end }}
           </article>
           {{ end }}
         </section>

@@ -312,6 +312,17 @@ body:has(.knowledge-shell) {
   line-height: 1.45;
 }
 
+.section-as-of {
+  display: inline-block;
+  margin-top: 0.55rem;
+  color: #7a4b22;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
 .section-prerequisites {
   margin: 0;
   color: var(--muted);
@@ -379,6 +390,26 @@ body:has(.knowledge-shell) {
   color: #9a9f99;
   font-size: 0.74rem;
   line-height: 1.5;
+}
+
+.curriculum-topic > p.topic-prediction,
+.curriculum-topic > p.topic-watch {
+  color: #667069;
+}
+
+.curriculum-topic > p.topic-prediction {
+  margin-top: 0.55rem;
+}
+
+.topic-prediction strong,
+.topic-watch strong {
+  display: inline-block;
+  min-width: 3.6rem;
+  color: #7a4b22;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .curriculum-topic-available {
