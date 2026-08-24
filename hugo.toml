@@ -3,8 +3,10 @@ theme = ["xmin"]
 
 title = ' HwP: Hardware Programmer'
 author = "Huwan Peng"
-copyright = "Copyright © 2025, Huwan Peng."
 languageCode = "en-US"
+
+[params]
+  footer = "Copyright © {Year}, Huwan Peng."
 
 [markup]
   [markup.goldmark]
