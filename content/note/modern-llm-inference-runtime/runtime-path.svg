@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 1060" role="img" aria-labelledby="title desc">
+  <title id="title">End-to-end LLM inference runtime path</title>
+  <desc id="desc">A request enters host software, passes through scheduling, continuous batching and KV-cache management, then through the model runner, graph and compiler layer, GPU kernels, and accelerator hardware. The result loops back to runtime orchestration for the next token.</desc>
+  <defs>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="135%"><feDropShadow dx="0" dy="5" stdDeviation="6" flood-color="#202522" flood-opacity="0.09"/></filter>
+    <style>
+      .bg{fill:#f7f5f0}.title{font:700 34px Optima,Candara,Calibri,Arial,sans-serif;letter-spacing:-.7px;fill:#202522}.subtitle{font:400 18px Optima,Candara,Calibri,Arial,sans-serif;fill:#667069}.lane{font:700 14px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:1.4px;fill:#667069}.node-title{font:700 23px Optima,Candara,Calibri,Arial,sans-serif;fill:#202522}.node-copy{font:400 18px Optima,Candara,Calibri,Arial,sans-serif;fill:#667069}.compact-title{font:700 18px Optima,Candara,Calibri,Arial,sans-serif;fill:#202522}.compact-copy{font:400 15px Optima,Candara,Calibri,Arial,sans-serif;fill:#667069}.chip{font:600 14px Optima,Candara,Calibri,Arial,sans-serif;fill:#164e63}.loop-label{font:600 15px Optima,Candara,Calibri,Arial,sans-serif;fill:#7a491e}.box{fill:#fffdfa;stroke:#d8ddd7;stroke-width:2}.box-accent{fill:#e5eef0;stroke:#9ab8c0;stroke-width:2}.box-warm{fill:#f3e8dc;stroke:#d8b48d;stroke-width:2}.chip-box{fill:#f7f5f0;stroke:#a9c0c6;stroke-width:1.5}.flow{fill:none;stroke:#164e63;stroke-width:2.2;stroke-linecap:round}.arrowhead{fill:#164e63}.loop{fill:none;stroke:#9a5f27;stroke-width:2.2;stroke-linecap:round}.arrowhead-warm{fill:#9a5f27}.divider{stroke:#d8ddd7;stroke-width:1.5}
+    </style>
+  </defs>
+  <rect class="bg" width="700" height="1060" rx="20"/>
+  <text class="title" x="38" y="58">From request to accelerator</text>
+  <text class="subtitle" x="38" y="86">One iteration through the modern inference stack</text>
+  <text class="lane" x="38" y="128">HOST / CONTROL PLANE</text>
+  <g filter="url(#shadow)">
+    <rect class="box" x="80" y="148" width="500" height="88" rx="15"/>
+    <circle cx="124" cy="192" r="22" fill="#164e63"/><path d="M116 192h16M124 184v16" stroke="#f7f5f0" stroke-width="3" stroke-linecap="round"/>
+    <text class="node-title" x="160" y="186">Incoming request</text><text class="node-copy" x="160" y="213">API · tokenizer · parameters · request state</text>
+  </g>
+  <path class="flow" d="M330 236V262"/><path class="arrowhead" d="M323 262H337L330 271Z"/>
+  <g filter="url(#shadow)">
+    <rect class="box-accent" x="38" y="274" width="584" height="260" rx="18"/>
+    <text class="node-title" x="68" y="312">Runtime orchestration</text><text class="node-copy" x="68" y="337">Choose work and map sequence state to memory.</text>
+    <rect class="box" x="65" y="363" width="160" height="90" rx="12"/><text class="compact-title" x="84" y="394">Scheduler</text><text class="compact-copy" x="84" y="418">admit · pause</text><text class="compact-copy" x="84" y="438">finish</text>
+    <path class="flow" d="M225 408H242"/><path class="arrowhead" d="M242 401V415L251 408Z"/>
+    <rect class="box" x="255" y="363" width="160" height="90" rx="12"/><text class="compact-title" x="274" y="394">Batch builder</text><text class="compact-copy" x="274" y="418">token budget</text><text class="compact-copy" x="274" y="438">execution shapes</text>
+    <path class="flow" d="M415 408H432"/><path class="arrowhead" d="M432 401V415L441 408Z"/>
+    <rect class="box" x="445" y="363" width="150" height="90" rx="12"/><text class="compact-title" x="464" y="394">KV manager</text><text class="compact-copy" x="464" y="418">allocate · reuse</text><text class="compact-copy" x="464" y="438">evict</text>
+    <rect class="chip-box" x="65" y="476" width="126" height="35" rx="18"/><text class="chip" x="128" y="499" text-anchor="middle">chunked prefill</text>
+    <rect class="chip-box" x="200" y="476" width="126" height="35" rx="18"/><text class="chip" x="263" y="499" text-anchor="middle">prefix caching</text>
+    <rect class="chip-box" x="335" y="476" width="126" height="35" rx="18"/><text class="chip" x="398" y="499" text-anchor="middle">speculation</text>
+    <rect class="chip-box" x="470" y="476" width="125" height="35" rx="18"/><text class="chip" x="532" y="499" text-anchor="middle">distribution</text>
+  </g>
+  <path class="flow" d="M330 534V560"/><path class="arrowhead" d="M323 560H337L330 569Z"/>
+  <g filter="url(#shadow)"><rect class="box" x="80" y="572" width="500" height="88" rx="15"/><text class="node-title" x="112" y="609">Model runner</text><text class="node-copy" x="112" y="636">Build tensors, KV block tables, and device commands</text></g>
+  <path class="flow" d="M330 660V686"/><path class="arrowhead" d="M323 686H337L330 695Z"/>
+  <g filter="url(#shadow)"><rect class="box" x="80" y="698" width="500" height="98" rx="15"/><text class="node-title" x="112" y="735">Graph / compiler / engine</text><text class="node-copy" x="112" y="762">specialize · select · fuse · capture / replay</text></g>
+  <path class="flow" d="M330 796V835"/><path class="arrowhead" d="M323 835H337L330 844Z"/><line class="divider" x1="38" y1="824" x2="662" y2="824"/><text class="lane" x="38" y="861">DEVICE / DATA PLANE</text>
+  <g filter="url(#shadow)"><rect class="box-warm" x="38" y="881" width="584" height="88" rx="15"/><text class="node-title" x="70" y="918">GPU kernels</text><text class="node-copy" x="70" y="945">GEMM · attention · collectives · sampling</text></g>
+  <path class="loop" d="M330 969V985"/><path class="arrowhead-warm" d="M323 985H337L330 994Z"/>
+  <g filter="url(#shadow)"><rect x="38" y="997" width="584" height="52" rx="14" fill="#202522"/><text x="68" y="1030" font-family="Optima,Candara,Calibri,Arial,sans-serif" font-size="20" font-weight="700" fill="#f7f5f0">Hardware</text><text x="178" y="1030" font-family="Optima,Candara,Calibri,Arial,sans-serif" font-size="16" fill="#d8ddd7">compute · SRAM · HBM · control · interconnect</text></g>
+  <path class="loop" d="M622 1023H650Q674 1023 674 999V336Q674 312 650 312H631"/><path class="arrowhead-warm" d="M631 305V319L622 312Z"/><text class="loop-label" x="656" y="744" text-anchor="end" transform="rotate(-90 656 744)">next token / next scheduler iteration</text>
+</svg>
