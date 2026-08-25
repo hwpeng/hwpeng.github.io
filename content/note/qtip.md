@@ -1,18 +1,24 @@
 ---
 title: "QTIP: High-Dimensional Quantization with Trellises"
 area: "AI Architecture"
-summary: "A learning note on why QTIP replaces exponentially large vector codebooks with a structured trellis and hardware-aware decoding."
 ---
 
-> **Learning note, not paper summary.** This page records my current mental model of QTIP. Claims labeled **Paper result** come from the [QTIP paper, arXiv v4](https://arxiv.org/abs/2406.11235) and its [official implementation](https://github.com/Cornell-RelaxML/qtip). Items labeled **TODO** are questions I still need to verify.
+## 1. The problem in one sentence
 
-## 1. What problem QTIP solves
+For small-batch autoregressive inference, moving weights from memory is often more expensive than the arithmetic. Storing weights with fewer bits reduces model capacity requirements and weight bandwidth.
 
-Large language models move a great deal of weight data for every generated token. During small-batch autoregressive decoding, that weight traffic often makes inference **memory-bandwidth bound**: the arithmetic units may wait while weights arrive from memory.
+QTIP targets the difficult regime around 2 bits per weight, where independently rounding every weight causes substantial model-quality loss.
 
-Weight-only post-training quantization (PTQ) stores trained weights with fewer bits. If weights occupy fewer bytes, a memory-bound decoder can move them faster and fit larger models into a fixed memory capacity. QTIP focuses on a harder version of this problem: preserving model quality at very low weight precision, especially around 2 bits per weight.
+The quality criterion is simple:
 
-The per-layer objective used by many PTQ methods is
+> A quantized weight representation is good if it changes the layer output very little on realistic inputs.
+
+The numerical distance between the original and quantized weights matters only insofar as it affects the layer's behavior.
+
+<details>
+<summary>Mathematical objective</summary>
+
+Many post-training quantization methods optimize
 
 \[
 \ell(\widehat W)
@@ -20,183 +26,327 @@ The per-layer objective used by many PTQ methods is
 = \operatorname{tr}\!\left((\widehat W-W)H(\widehat W-W)^T\right),
 \]
 
-where \(W\) is the original weight matrix, \(\widehat W\) is its quantized version, and \(H=\mathbb{E}_x[xx^T]\) is a proxy Hessian built from calibration activations. The important point for me is that **not all weight errors matter equally**: an error is more costly when it changes the layer output along directions that occur in real activations. [Paper §2](https://arxiv.org/abs/2406.11235)
+where \(H=\mathbb E[xx^T]\) is estimated from calibration activations. This weights quantization errors by how strongly they affect activation directions seen in practice. [Paper §2](https://arxiv.org/abs/2406.11235)
 
-**My current one-line framing:** QTIP tries to get the distortion advantage of very high-dimensional quantization without paying for an exponentially large vector codebook at inference time.
+</details>
 
-## 2. Scalar quantization vs. vector quantization
+## 2. Why vector quantization beats scalar quantization
 
-Suppose the target rate is \(k\) bits per weight.
+### Scalar quantization
 
-| Method | What is quantized together? | Number of reconstruction choices | Main advantage | Main limitation |
-|---|---:|---:|---|---|
-| Scalar quantization (SQ) | One weight | \(2^k\) scalar levels | Simple rounding and decoding | Each coordinate is treated independently |
-| Vector quantization (VQ) | A vector of \(d\) weights | \(2^{kd}\) vectors in \(\mathbb{R}^d\) | Better geometric shaping and packing | Search and codebook storage grow exponentially with \(d\) |
-| Trellis-coded quantization (TCQ) | A long sequence constrained to a trellis path | Implicitly many sequences | High effective dimension with structured search | Requires stateful encoding and carefully designed decoding |
+At \(k=2\) bits per weight, scalar quantization gives each weight four reconstruction levels:
 
-For unstructured VQ, the codebook is
+```text
+00 -> value 0
+01 -> value 1
+10 -> value 2
+11 -> value 3
+```
 
-\[
-\mathcal{C}\in\mathbb{R}^{2^{kd}\times d}.
-\]
+Every coordinate is quantized independently. In multiple dimensions this forces the reconstruction points and decision regions into an axis-aligned Cartesian grid.
 
-A straightforward nearest-neighbor search costs \(O(2^{kd}d)\), and storing the codebook also costs \(O(2^{kd}d)\). The exponential is the central problem: even when the bitrate \(k\) is fixed, increasing \(d\) quickly becomes impractical. [Paper §2.2](https://arxiv.org/abs/2406.11235)
+### Vector quantization
 
-## 3. Why high-dimensional quantization helps
-
-Scalar quantization partitions each coordinate independently, so its cells are axis-aligned products of intervals. A vector quantizer can shape cells jointly in \(d\)-dimensional space. As dimension increases, the code can use its finite set of reconstruction points more efficiently for the source distribution.
-
-The paper illustrates this with a controlled experiment: quantizing an i.i.d. Gaussian source at 2 bits per scalar.
-
-For a memoryless Gaussian source with variance \(\sigma^2\) under squared-error distortion, the asymptotic rate-distortion limit is
+Vector quantization groups \(D\) weights and chooses their reconstruction jointly:
 
 \[
-D^\star(R)=\sigma^2 2^{-2R}.
+(w_1,\ldots,w_D)\longrightarrow(\widehat w_1,\ldots,\widehat w_D).
 \]
 
-For unit variance and \(R=2\), this gives \(D^\star=0.0625\), shown as \(0.063\) in the paper.
+This helps when coordinates are correlated, but correlation is not required. Even independent, equal-variance Gaussian coordinates form a spherical joint distribution. Scalar quantization still partitions that space into rectangular cells, while vector quantization can place codewords and shape cells more efficiently.
 
-| Quantizer | Effective dimension | MSE reported by the paper |
-|---|---:|---:|
-| Lloyd-Max scalar quantizer | 1 | 0.118 |
-| QuIP# E8P VQ | 8 | 0.089 |
-| QTIP 1MAD TCQ | 256 | 0.069 |
-| Infinite-length distortion-rate bound | \(\infty\) | 0.063 |
+The precise takeaway is:
 
-**Paper result:** in this Gaussian experiment, the 256-dimensional trellis quantizer is much closer to the distortion-rate bound than the scalar or 8D alternatives. This table is about source-coding distortion, not end-to-end LLM accuracy. [Paper Table 1](https://arxiv.org/abs/2406.11235)
+> At the same total number of bits, vector quantization can achieve lower average error by optimizing the geometry of the whole space jointly.
 
-**My mental model:** dimension is useful because the quantizer gets more freedom to distribute error across coordinates. The benefit is not simply “more values”; it is a better-shaped set of representable vectors at the same number of bits per weight.
+Both scalar and vector quantization use \(kD\) bits for \(D\) weights. Vector quantization does not create more bit patterns; it maps those patterns to better-positioned high-dimensional reconstruction vectors.
 
-## 4. Why conventional VQ becomes impractical at high dimension
+## 3. How ordinary vector quantization works—and why it stops scaling
 
-The same expression \(2^{kd}\) explains both sides of the problem.
+A conventional vector quantizer stores a codebook
 
-| At quantization time | At inference time |
+\[
+\mathcal C=\{c_1,\ldots,c_{2^{kD}}\}, \qquad c_i\in\mathbb R^D.
+\]
+
+Offline encoding finds the codeword closest to each original weight vector and stores its index. Inference uses that index to look up the reconstruction vector.
+
+For \(k=2\) bits per weight:
+
+| Dimension \(D\) | Total index bits | Explicit codewords |
+|---:|---:|---:|
+| 1 | 2 | 4 |
+| 4 | 8 | 256 |
+| 8 | 16 | 65,536 |
+| 16 | 32 | about 4.3 billion |
+| 256 | 512 | \(2^{512}\) |
+
+Dimensions around 4–8 are practical for explicit or heavily compressed codebooks. The QTIP paper compares against AQLM and QuIP#, which effectively remain at dimension 8. A full 256-dimensional codebook is impossible to store or search.
+
+This creates the central tension:
+
+- **Quality:** larger \(D\) improves high-dimensional geometry and lowers distortion.
+- **Practicality:** larger \(D\) makes an explicit codebook exponentially larger.
+
+## 4. QTIP's core idea: compute the codeword instead of storing it
+
+| Representation | How a 512-bit encoding becomes a 256D vector |
 |---|---|
-| Find the closest of \(2^{kd}\) candidate vectors | Keep the \(2^{kd}\times d\) codebook close enough to the compute units for fast lookup |
-| Brute-force work grows exponentially with dimension | Codebook capacity and bandwidth grow exponentially with dimension |
+| Ordinary VQ | Look it up in an impossibly large table |
+| QTIP | Generate it with a small, fixed decoding program |
 
-At \(k=2\) bits and \(d=8\), a full codebook already contains \(2^{16}=65{,}536\) vectors. The paper reports that AQLM uses a 1 MiB 8D codebook that does not fit in L1 cache, while QuIP# uses symmetry to compress its 8D E8P codebook by \(256\times\) so it barely fits. Both remain effectively limited to dimension 8. [Paper §2.2](https://arxiv.org/abs/2406.11235)
+The fixed program reads the encoded bits in steps and generates reconstruction values. This program is the **trellis**: a finite-state machine viewed across a sequence of steps.
 
-So the desired combination looks contradictory:
+QTIP therefore implements an **implicit, structured codebook**. It sacrifices the freedom to position all \(2^{512}\) vectors arbitrarily, but avoids storing them. Its design point lies between scalar quantization and unrestricted high-dimensional VQ:
+
+| Method | What determines each reconstructed vector? | Flexibility |
+|---|---|---|
+| Scalar quantization | Each output depends only on its own \(k\) bits | Lowest |
+| QTIP | Each output also depends on an overlapping history of bits | Intermediate |
+| Full high-dimensional VQ | The entire \(kD\)-bit index may map to an arbitrary vector | Highest, but impractical |
+
+The number of bit patterns is not the differentiator: all three representations have \(2^{kD}\) possible encodings. The difference is how flexibly those encodings can be positioned in \(D\)-dimensional space.
+
+## 5. What QTIP stores and transmits
+
+QTIP does not store a large state-transition graph or a large high-dimensional codebook. The model contains:
+
+- the packed QTIP bitstream, averaging roughly \(k\) bits per weight;
+- scales and a small amount of per-block metadata;
+- optionally, a small lookup table for a hybrid decoder.
+
+The decoding rules are shared implementation logic, not a per-weight table.
+
+At inference time, the datapath is:
+
+1. Read packed QTIP bits.
+2. Extract an \(L\)-bit state window.
+3. Map the state to reconstruction values.
+4. Apply the scale and convert formats.
+5. Consume the values in dense computation.
+
+The state-to-value mapping can be a computed function or a hash followed by a small LUT. Accumulation usually uses higher precision than the reconstructed weights.
+
+Only a tile is decoded at a time. The complete model is not expanded into the native compute format and written back to external memory. Decoded values are consumed near the compute units and then discarded.
+
+Architecturally, QTIP exchanges **less model storage and weight bandwidth** for **a few shift, mask, mapping, scaling, and conversion operations near compute**.
+
+## 6. The clever part: all states can be decoded in parallel
+
+A generic finite-state machine appears sequential: \(s_0\rightarrow s_1\rightarrow s_2\rightarrow s_3\).
+
+QTIP chooses a special bitshift state. The state at each position is simply an overlapping \(L\)-bit window in the stored bitstream:
 
 ```text
-high dimension  -> better shaping -> lower distortion
-high dimension  -> huge codebook  -> slow or impossible lookup
+encoded bitstream:  10 01 11 00 10 11 ...
+
+lane 0:             [---- state 0 ----] -> decoder -> weight group 0
+lane 1:                   [---- state 1 ----] -> decoder -> weight group 1
+lane 2:                         [---- state 2 ----] -> decoder -> weight group 2
 ```
 
-QTIP's contribution is a structured representation that breaks this direct link between effective dimension and explicit codebook size.
+Each lane can directly extract its own window. It does not need the preceding lane to calculate the preceding state first.
 
-## 5. The core idea behind QTIP
-
-QTIP combines three ideas that solve different parts of the problem:
-
-```text
-LLM weights W and calibration Hessian H
-                 │
-                 │ randomized Hadamard incoherence processing
-                 ▼
-approximately Gaussian-like, evenly spread coordinates
-                 │
-                 │ BlockLDLQ + Viterbi search
-                 ▼
-k-bit path through a bitshift trellis
-                 │
-                 │ computed or hybrid Gaussian code
-                 ▼
-weight tiles decoded for matrix multiplication
-```
-
-### 5.1 Incoherence processing makes the source easier to code
-
-QTIP builds on QuIP#'s randomized Hadamard transform (RHT). It rotates and sign-mixes weights and the proxy Hessian so large values and important rounding directions are less aligned with individual coordinates. The transformed weights are approximately i.i.d. Gaussian-like, which lets QTIP design its trellis codes for a known source distribution. [Paper §2.1](https://arxiv.org/abs/2406.11235)
-
-I should not interpret this as proving that every transformed weight is exactly independent and Gaussian. The paper uses an incoherence guarantee and an approximate distributional model.
-
-### 5.2 A trellis represents a huge structured codebook implicitly
-
-In TCQ, reconstruction values must follow a valid walk through a state graph. For an \((L,k,V)\) trellis, there are \(2^L\) states; each transition emits \(V\) reconstructed weights while consuming \(kV\) bits.
-
-For squared error, the best path can be found with the Viterbi recurrence
+Conceptually,
 
 \[
-D_t(y)=\min_{(x,y)\in G}\left[D_{t-1}(x)+\lVert C_y-s_t\rVert_2^2\right].
+s_t=\operatorname{window}_L(\text{encoded bits},t),\qquad
+v_t=f(s_t),\qquad
+\widehat w_t=\text{scale}\times v_t.
 \]
 
-With the paper's optimized formulation, quantization costs \(O(2^L T)\) for a length-\(T\) sequence: exponential in the state bits \(L\), but **linear in sequence length** and independent of bitrate \(k\). This is what makes an effective dimension above 100 tractable. [Paper §2.3](https://arxiv.org/abs/2406.11235)
+This is why QTIP can retain finite-state structure without imposing a serial inference decoder.
 
-## 6. How QTIP gets practical high-dimensional quantization
+<details>
+<summary>Bitshift transition formula</summary>
 
-Plain TCQ still has two inference problems: a generic trellis must be stored, and decoding a later state may require walking through all earlier transitions. QTIP addresses both.
-
-### 6.1 The bitshift trellis
-
-For current state \(i\), a valid next state \(j\) has the form
+For an \((L,k,V)\) trellis, the next state can be written as
 
 \[
 j=(i\,2^{kV}\bmod 2^L)+c,
 \qquad 0\le c<2^{kV}.
 \]
 
-This behaves like a shift register: discard the oldest \(kV\) state bits, shift, and append the next \(kV\) encoded bits.
+This discards the oldest \(kV\) state bits and appends the next \(kV\) encoded bits. Because the transition is arithmetic, no graph needs to be stored. [Paper §3.1 and Figure 2](https://arxiv.org/abs/2406.11235)
 
-```text
-state window at step t:      [ b1 b2 ... bL ]
-                                      shift by kV
-state window at step t + 1:       [ ... bL | new bits ]
-```
+</details>
 
-Because the transition rule is arithmetic, the decoder does not store a graph. Because the state for each output group is determined by a contiguous \(L\)-bit window in the encoded stream, different groups can be decoded in parallel. [Paper §3.1 and Figure 2](https://arxiv.org/abs/2406.11235)
+## 7. The parameters an architect should know
 
-### 6.2 Computed codes replace the large node-value lookup
+A QTIP configuration can be understood through \((k,D,L,V)\), plus its decoder and scale granularity.
 
-A simple bitshift trellis would make neighboring outputs highly correlated because adjacent state windows share many bits. QTIP maps each \(L\)-bit state through a cheap pseudorandom function that produces an approximately Gaussian reconstruction value.
+### \(k\): stored bits per weight
 
-- **1MAD** uses a linear congruential generator, sums four byte lanes, then rescales the result.
+This is the primary bandwidth–quality knob: smaller \(k\) reduces weight traffic but usually increases quantization error; larger \(k\) does the reverse.
+
+The effective storage rate is slightly above \(k\) because scales, padding, and other metadata also consume space.
+
+### \(D\): weights jointly encoded in a tile or sequence
+
+Larger \(D\) provides more high-dimensional shaping benefit, with diminishing returns and greater offline/implementation complexity. The paper commonly reshapes a \(16\times16\) weight tile into a sequence, giving
+
+\[
+D=256.
+\]
+
+In the paper's Gaussian experiment, dimension 256 gets close to the theoretical distortion limit. This makes 256 a demonstrated practical sweet spot, not a universal guarantee.
+
+### \(L\): bits in the overlapping state window
+
+Larger \(L\) gives the implicit codebook more memory and more possible states:
+
+\[
+\text{number of possible states}=2^L.
+\]
+
+It does **not** mean that \(L\) bits must be transmitted for every weight, because neighboring windows overlap. Runtime decoding remains a window extraction and a fixed mapping, provided the state fits the intended machine operations. The main cost of increasing \(L\) is exponential offline encoding time and memory.
+
+### \(V\): weights emitted per decoding step
+
+Each step consumes \(kV\) new encoded bits and produces \(V\) reconstructed weights. At \(k=2\), \(V=1\) consumes 2 bits and produces one weight; \(V=2\) consumes 4 bits and produces two weights.
+
+\(V\) mainly controls decoder granularity, packed-data handling, and mapping to vector or matrix hardware.
+
+The useful identities are:
+
+\[
+\text{bits advanced per step}=kV,
+\qquad
+\text{steps per }D\text{-weight sequence}=D/V.
+\]
+
+### Summary of the knobs
+
+| Parameter | Meaning | Main trade-off |
+|---|---|---|
+| \(k\) | Stored bits per weight | Bandwidth/capacity vs. quality |
+| \(D\) | Joint quantization dimension | Shaping gain vs. offline/layout complexity |
+| \(L\) | State-history bits | Code richness vs. exponential offline search cost |
+| \(V\) | Weights emitted per step | Decoder granularity and hardware mapping |
+| Decoder | Computed code or small-LUT hybrid | Arithmetic cost vs. local lookup cost |
+| Scale group | Weights sharing scale/metadata | Metadata overhead vs. adaptability |
+
+## 8. Why the computed code is plausible
+
+A fixed function cannot reproduce an arbitrary learned codebook. QTIP deliberately gives up that freedom and designs inexpensive functions whose outputs have a useful approximately Gaussian distribution.
+
+Before quantization, QTIP applies reversible mixing that spreads outliers and makes transformed coordinates more uniform and approximately Gaussian-like. A universal Gaussian-like computed code can then work across layers more effectively.
+
+This preprocessing is called **incoherence processing** and builds on QuIP#'s randomized Hadamard transform. The architectural point is:
+
+> Normalize the geometry of the source so a cheap shared decoder is sufficient.
+
+The complete quality result therefore comes from the whole conversion pipeline—not from the trellis alone. It combines incoherence processing, error-aware offline encoding, the trellis representation, and optional fine-tuning.
+
+<details>
+<summary>Computed-code variants in the paper</summary>
+
+- **1MAD** uses a linear congruential generator, sums four byte lanes, and rescales the result.
 - **3INST** uses a linear congruential generator plus bit manipulation of packed FP16 values.
-- **HYB** hashes the state into a small, trainable 2D lookup table and applies a sign flip.
+- **HYB** hashes the state into a small trainable 2D lookup table and applies a sign flip.
 
-The lookup-free codes are designed for cache-limited hardware; the hybrid code uses a small table when fast local lookup storage is available. The paper reports at most four hardware instructions per decoded weight for its NVIDIA GPU implementations. [Paper §§3.1.1-3.1.2](https://arxiv.org/abs/2406.11235)
+The lookup-free codes favor hardware where cache capacity or lookup bandwidth is scarce. HYB uses a small table when fast local lookup storage is available. The paper reports at most four hardware instructions per decoded weight for its NVIDIA GPU implementations. [Paper §§3.1.1–3.1.2](https://arxiv.org/abs/2406.11235)
 
-### 6.3 BlockLDLQ supplies the error-aware rounding framework
+</details>
 
-QTIP is mainly a choice of **what code to round into**, not a new general answer for **how to minimize the Hessian-weighted PTQ objective**. In the experiments, it replaces the vector quantizer inside QuIP#'s BlockLDLQ. A \(T_x\times T_y\) weight tile is reshaped into one high-dimensional sequence and quantized with Viterbi search. The common \(T_x=T_y=16\) setting gives an effective dimension of \(256\). [Paper §4 and Appendix A.2](https://arxiv.org/abs/2406.11235)
+## 9. Offline encoding: important to the toolchain, not the inference datapath
 
-## 7. Hardware implications
+Offline conversion receives the original weights and representative calibration activations, then produces packed QTIP weights and metadata that minimize important layer-output error.
 
-### What appears attractive
+The number of possible paths is exponential in sequence length, but the encoder does not enumerate them. At each step it keeps only the lowest-error path reaching each state. Paths ending in the same state have identical future choices, so all higher-error alternatives can be discarded. This dynamic program is the Viterbi algorithm.
 
-| Design choice | Hardware consequence |
-|---|---|
-| Weight-only 2-4 bit storage | Reduces model memory footprint and weight traffic; most valuable in memory-bound inference |
-| Bitshift state transition | Replaces a stored trellis graph with shifts, masks, and appended bits |
-| Lookup-free 1MAD / 3INST codes | Trade codebook reads for a few integer/bit-manipulation instructions |
-| HYB code | Uses a small tunable lookup table when local cache/shared memory is available |
-| \(16\times16\) trellis tile | Aligns the paper's implementation with common GPU MMA tile geometry |
-| Parallel bit-window decode | Avoids the serial graph walk required by a generic trellis decoder |
+The paper places this search inside QuIP#'s BlockLDLQ framework, which accounts for the calibration-weighted importance of errors. Neither Viterbi search nor BlockLDLQ runs for every inference request.
+
+<details>
+<summary>Viterbi recurrence and encoding complexity</summary>
+
+For squared error, the best path is found using
+
+\[
+D_t(y)=\min_{(x,y)\in G}
+\left[D_{t-1}(x)+\lVert C_y-s_t\rVert_2^2\right].
+\]
+
+With the optimized formulation, quantizing a length-\(T\) sequence costs \(O(2^L T)\): exponential in state bits \(L\), but linear in sequence length \(T\), rather than exponential in \(T\). [Paper §2.3](https://arxiv.org/abs/2406.11235)
+
+</details>
+
+## 10. When QTIP should improve performance
+
+QTIP helps when the time saved moving weights exceeds the time spent decoding them:
+
+\[
+T_{\text{saved memory}}>T_{\text{decode}}.
+\]
+
+It is most attractive when:
+
+- inference is memory-bandwidth bound;
+- batch size is small and weight reuse is low;
+- state extraction and decoding run in parallel;
+- decoded tiles are consumed near the compute units without an external-memory round trip;
+- the packed layout, tile size, and native compute path fit together well.
+
+It becomes less attractive when:
+
+- batch size and weight reuse make execution compute-bound;
+- bit extraction, conversion, or decoder instructions saturate the machine;
+- register or local-memory pressure lowers occupancy;
+- the target backend lacks an efficient QTIP-consuming matrix kernel.
+
+QTIP is therefore not best understood as "2-bit compute." It is:
+
+> An approximately \(k\)-bit memory representation that spends a small amount of near-compute work to feed a native dense-compute pipeline.
+
+<details>
+<summary>Reported GPU results and hardware cautions</summary>
 
 **Paper result:** on an RTX 6000 Ada at batch size 1 with matrix fusion, the authors report 188 tokens/s for 2-bit QTIP on Llama 2 7B, compared with 186 for 2-bit QuIP#, 81.5 for 2-bit AQLM, and 55.9 for FP16. For Llama 2 70B, they report 23.5, 22.2, and 8.78 tokens/s respectively; FP16 is listed as out of memory. These are results for the authors' kernels and setup, not universal speedups. [Paper Tables 4 and 17](https://arxiv.org/abs/2406.11235)
 
-In the reported HYB configuration, \(Q=9\) and \(V=2\) give a logical 2 KiB table. The paper says this table is duplicated \(32\times\) to avoid GPU bank conflicts. The [released CUDA kernel](https://github.com/Cornell-RelaxML/qtip/blob/main/qtip-kernels/src/inference.cu) fuses packed-state extraction, hash/LUT decoding, and matrix-vector multiplication rather than materializing a complete dequantized weight matrix first.
+In the reported HYB configuration, \(Q=9\) and \(V=2\) give a logical 2 KiB table. The paper says this table is duplicated \(32\times\) to avoid GPU bank conflicts. The [released CUDA kernel](https://github.com/Cornell-RelaxML/qtip/blob/main/qtip-kernels/src/inference.cu) combines packed-state extraction, hash/LUT decoding, and matrix-vector multiplication without materializing a complete dequantized weight matrix.
 
-### What I should not conclude yet
+The paper does not establish universal performance across batch sizes, CPUs, NPUs, or custom accelerators, and it reports no ASIC synthesis, area, timing, SRAM, or energy measurements.
 
-- The paper does **not** show that QTIP wins for every batch size. As batch size grows and weight reuse increases, inference can become more compute-bound.
-- The GPU instruction counts do **not** automatically translate to the same cost on a CPU, NPU, or custom accelerator.
-- The paper gives a possible ARMv8 lookup construction but does not report measured ARM throughput for it.
-- End-to-end cost also includes incoherence transforms, packing, launch overheads, and interaction with fused matrix kernels.
-- The paper reports no ASIC synthesis, area, timing, SRAM, or energy measurements.
+</details>
 
-## 8. Open questions / things I still don't understand
+## 11. Quantization-quality intuition
 
-- **TODO — effective dimension:** Build a small example that makes the distinction between trellis state size \(L\), emitted vector size \(V\), tile size \(T_xT_y\), and “effective quantization dimension” precise.
-- **TODO — distortion intuition:** Derive or simulate why the distortion-rate gap shrinks with dimension for an i.i.d. Gaussian source instead of relying only on Table 1.
-- **TODO — RHT execution:** Trace exactly where the randomized Hadamard transforms occur in the inference graph and whether they are fused with surrounding operators in the released kernels.
-- **TODO — bit accounting:** Work through tail-biting trellis storage. Without tail biting the paper gives \(kT+L-kV\) bits; verify how its approximate tail-biting procedure removes the initial-state overhead in actual packed tensors.
-- **TODO — code correlation:** Reproduce Figure 3's neighboring-code plots and measure how 1MAD, 3INST, and HYB decorrelate overlapping state windows.
-- **TODO — hardware mapping:** Map MAD, `lop3`, `vabsdiff4`, shifts, and packed FP16 operations onto one modern GPU ISA and one non-GPU target.
-- **TODO — roofline:** Quantify when the extra decode instructions stop being “free” under a memory-bandwidth roofline as batch size or arithmetic intensity increases.
-- **TODO — quality boundary:** Separate the contribution of high dimension from BlockLDLQ, fine-tuning, and incoherence processing with the paper's ablations.
+For an i.i.d. Gaussian source at 2 bits per scalar, the paper reports:
+
+| Quantizer | Effective dimension | MSE |
+|---|---:|---:|
+| Lloyd-Max scalar quantizer | 1 | 0.118 |
+| QuIP# E8P VQ | 8 | 0.089 |
+| QTIP 1MAD TCQ | 256 | 0.069 |
+| Infinite-length distortion-rate bound | \(\infty\) | 0.063 |
+
+The experiment shows that QTIP's structured dimension-256 code gets much closer to the ideal Gaussian source-coding limit than scalar or 8D alternatives. It demonstrates quantization geometry, not end-to-end LLM accuracy. [Paper Table 1](https://arxiv.org/abs/2406.11235)
+
+<details>
+<summary>Gaussian rate-distortion formula</summary>
+
+For a memoryless Gaussian source with variance \(\sigma^2\) and squared-error distortion,
+
+\[
+D^\star(R)=\sigma^2 2^{-2R}.
+\]
+
+For unit variance and \(R=2\), \(D^\star=0.0625\), shown as 0.063 in the paper.
+
+</details>
+
+## 12. Final architectural model
+
+QTIP jointly encodes \(D\) weights at roughly \(k\) stored bits per weight. During inference:
+
+1. Extract overlapping \(L\)-bit windows from the packed bitstream in parallel.
+2. Decode each window with a computed function or small LUT.
+3. Produce \(V\) reconstructed weights per step.
+4. Scale and consume those weights in native dense computation.
+
+The one-line summary is:
+
+> QTIP obtains much of the quality advantage of high-dimensional vector quantization by generating a structured codebook from overlapping bit windows, avoiding both an enormous explicit codebook and serial inference decoding.
 
 ## References
 

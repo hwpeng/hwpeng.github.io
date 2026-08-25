@@ -91,7 +91,7 @@ sections:
           - title: "QTIP and high-dimensional vector quantization"
             priority: "Frontier"
             href: "/note/qtip/"
-            status: "Learning now"
+            status: "Done"
             why: "QTIP tests whether aggressive weight-bandwidth reduction can justify a structured state machine and on-the-fly decoder."
           - title: "Microscaling and block-scaled formats"
             priority: "Frontier"
