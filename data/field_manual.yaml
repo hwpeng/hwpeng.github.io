@@ -292,6 +292,8 @@ sections:
         topics:
           - title: "vLLM, SGLang, TensorRT-LLM, and runtime trade-offs"
             priority: "Core"
+            href: "/note/modern-llm-inference-runtime/"
+            status: "Done"
             why: "Comparing real engines reveals how scheduling, kernels, memory management, and hardware support interact."
           - title: "MoE serving, MegaMoE, and hierarchical agentic caches"
             priority: "Frontier"
