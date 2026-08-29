@@ -3,7 +3,7 @@ title: 为什么我永远不会买个股
 date: '2026-08-29'
 ---
 
-几年前，我来美国已经超过五年。博士毕业还遥遥无期，但在税务上我已经成为 resident，也终于可以开始认真考虑退休账户。博士生工资不高，至少有一个好处：我的收入远低于 Roth IRA 的限制，可以放心地往里面存钱。
+几年前，我来美国已经超过五年。博士毕业还遥遥无期，但在税务上我已经成为 resident，也开始认真考虑如何投资自己的积蓄。
 
 也是在那个时候，我正在研究 reinforcement learning，无意中看到了 AlphaGo 的主要开发者之一 [Julian Schrittwieser](https://www.julian.ac/now/) 的个人主页。他[记录了自己的生活理念](https://www.julian.ac/live/)，其中关于投资的建议简单得近乎无聊：留出足够生活一段时间的现金，把十年内用不到的钱定期投入指数基金，永远不要买个股。他甚至专门做了一份 [slides](https://docs.google.com/presentation/d/1kWsyBIKy42H20LpaGU-E6n0GJGRrpCTukzlv6VQRRdI/edit?slide=id.p#slide=id.p) 来解释这件事。
 
