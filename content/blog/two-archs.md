@@ -1,6 +1,7 @@
 ---
 title: A Conversation Across Two Architectures
 date: '2026-03-28'
+originalLanguage: en
 ---
 
 I talked with my childhood friend Tian Yang and his spouse today. We had not really talked for many years, but once we started, it became a three-hour conversation that felt strangely short. 

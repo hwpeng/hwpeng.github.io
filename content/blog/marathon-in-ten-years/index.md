@@ -1,6 +1,7 @@
 ---
 title: "The Marathon That Took Ten Years to Finish"
 date: '2022-11-26'
+originalLanguage: zh
 ---
 
 Saturday, November 26, 2022. I was running west toward Seattle on the 520 Bridge.

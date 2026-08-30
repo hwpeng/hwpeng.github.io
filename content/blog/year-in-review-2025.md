@@ -1,6 +1,7 @@
 ---
 title: "2025 Year in Review"
 date: '2025-12-31'
+originalLanguage: zh
 ---
 
 I have not written a year-end review in a long time, but 2025 absolutely deserves one.

@@ -1,6 +1,7 @@
 ---
 title: "Lost on Mount St. Helens: A Long and Crazy Birthday Adventure"
 date: '2022-09-06'
+originalLanguage: zh
 ---
 
 Starting last year, I decided to climb a mountain every year on my birthday. To make it a proper challenge, I usually choose something iconic and harder than anything I have climbed before. Last year I completed Mailbox Peak. This year I set my sights on Mount St. Helens.

@@ -1,8 +1,8 @@
 {{ $pages := slice }}
 {{ range .Sites }}
-  {{ $isDefaultLanguage := eq .Language.Lang "en" }}
   {{ range where .RegularPages "Section" "blog" }}
-    {{ if or $isDefaultLanguage (not .IsTranslated) }}
+    {{ $originalLanguage := .Params.originalLanguage | default "en" }}
+    {{ if or (not .IsTranslated) (eq .Language.Lang $originalLanguage) }}
       {{ $pages = $pages | append . }}
     {{ end }}
   {{ end }}

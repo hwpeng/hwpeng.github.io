@@ -65,6 +65,23 @@ nav { margin-bottom: 2.5rem; }
   background: var(--accent);
 }
 
+.post-translation {
+  margin-left: 0.2rem;
+  color: var(--muted);
+  font-size: 0.82rem;
+  white-space: nowrap;
+}
+
+.post-translation a {
+  color: var(--muted);
+  text-decoration-color: rgba(102, 112, 105, 0.32);
+}
+
+.post-translation a:hover,
+.post-translation a:focus-visible {
+  color: var(--accent);
+}
+
 .menu a {
   display: inline-block;
   padding: 0.3rem 0;

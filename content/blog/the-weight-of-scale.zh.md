@@ -1,6 +1,7 @@
 ---
 title: "规模之重"
 date: '2025-10-03'
+originalLanguage: en
 ---
 
 我大约在 2021 年第一次读到 Rich Sutton 那篇著名的 [*The Bitter Lesson*](http://www.incompleteideas.net/IncIdeas/BitterLesson.html)。当时我的博士读得很挣扎，做 AI accelerator 的论文接连被拒，所以并没有真正理解这篇文章。做硬件总让我觉得自己在追赶，只负责把算法研究者那些聪明的想法实现出来。我以为真正的创新在模型里，而不在硅片上。

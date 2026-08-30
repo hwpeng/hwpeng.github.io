@@ -1,6 +1,7 @@
 ---
 title: The Weight of Scale
 date: '2025-10-03'
+originalLanguage: en
 ---
 
 I first read Rich Sutton’s famous [*The Bitter Lesson*](http://www.incompleteideas.net/IncIdeas/BitterLesson.html) around 2021. As a struggling PhD student facing a string of paper rejections on AI accelerators, its message didn’t fully resonate with me at the time. My work in hardware seemed to be a constant game of catch-up, merely implementing the clever ideas of algorithm designers. I thought the real innovation was in the model, not the silicon.
@@ -34,5 +35,4 @@ For every thrilling leap in performance, a new shadow is cast. We need hardware 
 Alright, I think I've exceeded my context window for a Friday night. The real solution is to let the machine do the hard work anyway. To quote Sutton one last time:
 
 > We want AI agents that can discover like we can, not which contain what we have discovered. Building in our discoveries only makes it harder to see how the discovering process can be done.
-
 

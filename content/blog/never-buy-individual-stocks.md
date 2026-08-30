@@ -1,6 +1,7 @@
 ---
 title: "Why I Will Never Buy Individual Stocks"
 date: '2026-08-29'
+originalLanguage: zh
 ---
 
 A few years ago, I had been in the United States for more than five years. Finishing my PhD was still nowhere in sight, but for tax purposes I had become a resident, and I started thinking seriously about how to invest my savings.

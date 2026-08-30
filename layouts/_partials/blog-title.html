@@ -1,0 +1,6 @@
+<a href="{{ .RelPermalink }}">{{ .Title | markdownify }}</a>
+{{ with .Translations }}
+  {{ range . }}
+  <span class="post-translation">(<a href="{{ .RelPermalink }}" lang="{{ .Language.LanguageCode }}" hreflang="{{ .Language.LanguageCode }}">{{ .Language.LanguageName }}</a>)</span>
+  {{ end }}
+{{ end }}
