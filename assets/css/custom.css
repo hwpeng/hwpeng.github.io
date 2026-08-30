@@ -35,6 +35,36 @@ nav { margin-bottom: 2.5rem; }
 
 .menu li { margin: 0; }
 
+.article-meta-line {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.article-meta-line .date {
+  margin: 0;
+}
+
+.article-language-switch {
+  flex: 0 0 auto;
+  padding: 0.3rem 0.75rem;
+  color: var(--accent);
+  background: var(--accent-soft);
+  border: 1px solid rgba(22, 78, 99, 0.2);
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  line-height: 1.2;
+  text-decoration: none;
+}
+
+.article-language-switch:hover,
+.article-language-switch:focus-visible {
+  color: var(--page);
+  background: var(--accent);
+}
+
 .menu a {
   display: inline-block;
   padding: 0.3rem 0;

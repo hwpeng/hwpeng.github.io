@@ -1,5 +1,5 @@
 ---
-title: "Note: Linear Attention"
+title: "Notes on Linear Attention"
 date: '2026-01-28'
 ---
 

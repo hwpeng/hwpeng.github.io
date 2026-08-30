@@ -3,10 +3,42 @@ theme = ["xmin"]
 
 title = ' HwP: Hardware Programmer'
 author = "Huwan Peng"
-languageCode = "en-US"
+defaultContentLanguage = "en"
+defaultContentLanguageInSubdir = false
 
 [params]
   footer = "Copyright © {Year}, Huwan Peng."
+
+[languages]
+  [languages.en]
+    languageCode = "en-US"
+    languageName = "English"
+    weight = 1
+    [languages.en.params]
+      languageLabel = "EN"
+    [[languages.en.menus.main]]
+      name = "Home"
+      pageRef = "/"
+      weight = 1
+    [[languages.en.menus.main]]
+      name = "Blog"
+      pageRef = "/blog"
+      weight = 2
+
+  [languages.zh]
+    languageCode = "zh-CN"
+    languageName = "中文"
+    weight = 2
+    [languages.zh.params]
+      languageLabel = "中文"
+    [[languages.zh.menus.main]]
+      name = "Home"
+      url = "/"
+      weight = 1
+    [[languages.zh.menus.main]]
+      name = "Blog"
+      url = "/blog/"
+      weight = 2
 
 [markup]
   [markup.goldmark]
@@ -18,13 +50,3 @@ languageCode = "en-US"
         [markup.goldmark.extensions.passthrough.delimiters]
           block = [['\[', '\]'], ['$$', '$$']]
           inline = [['\(', '\)']]
-
-[menu]
-  [[menu.main]]
-    name = "Home"
-    url = "/"
-    weight = 1
-  [[menu.main]]
-    name = "Blog"
-    url = "/blog/"
-    weight = 2

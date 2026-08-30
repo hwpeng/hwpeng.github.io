@@ -1,5 +1,5 @@
 ---
-title: "Study Note: ML Compilation"
+title: "Notes on ML Compilation"
 date: '2025-11-08'
 ---
 

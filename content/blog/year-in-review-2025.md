@@ -1,52 +1,54 @@
 ---
-title: 2025年终总结 
+title: "2025 Year in Review"
 date: '2025-12-31'
 ---
 
-很多年没有写年终总结了，但是2025绝对值得。
+I have not written a year-end review in a long time, but 2025 absolutely deserves one.
 
-### 关于博士毕业
-算上硕士，我在UW待了9年。在毕业时，感到开心也意识到遗憾。 这个遗憾不在于文章数量，而在于过去几年我都没有任何进步。从文章的角度，现在几乎所有同事都比我更多更好，但是我不认为自己有任何能力上的差距。我只是觉得自己不应该仅仅是现在这样。浪费时间是不可以接受的。
+### Finishing My PhD
 
-如果把读博看作一个投资，显然它是一个高风险的项目，最终我没有取得高收益就并非是多么意外的事情。我学到的是：在做人生重大选择时要认真衡量**机会成本**，在路走不通时要勇于**及时止损**。
+Including my master's, I spent nine years at UW. I was happy to graduate, but I also left with regrets. It was not about the number of papers. It was the feeling that I had made no progress over the past few years. Almost all of my colleagues now have more and better publications than I do, but I do not believe there is any gap in our abilities. I simply feel that I should have become more than I am now. Wasting time is unacceptable.
 
+If a PhD is an investment, it is clearly a high-risk one, so perhaps it is not surprising that mine did not produce a high return. What I learned is this: take **opportunity cost** seriously when making major life decisions, and have the courage to **cut your losses** when a path is going nowhere.
 
-### 关于工作
-六月底我加入了Meta，做AI芯片架构。芯片开发的复杂程度比软件要高很多，一个产品从立项到投入使用可能需要几千人几年的投入。而架构师为了做好顶层设计，要承担好软件硬件沟通的桥梁。掌握各种知识是一方面，更重要的是要学会和不同领域的人沟通。
-因为需要大量的时间来累积经验，这显然不是一个能让你30岁就成为“首席科学家”年薪百万的领域，但大概率也不会35岁因为年纪被清退。
+### Work
 
-在工作中取得成功，前辈指点了三个维度，我是这样理解的：
-- **搞定事**：我的强项。要做到快速，高质量的交付，勇于承担重要困难的工作。建立个人reputation，让大家知道我是一个可靠的合作对象。
-- **搞定人**：我的弱项。与其费尽心机专研所谓职场生存之道，不如真诚做自己。前辈告诉我：能搞定人升职快，但搞定事更稳定 —— 这对我目前来说显然更重要。
-- **搞定方向**：长远目标。搞清楚交给我的活的原因和重要性，弄清楚领导需要什么，部门需要什么，公司需要什么。关注roadmap，行业最新的动态，SOTA的算法的芯片。这需要经验，急不来。 
+At the end of June, I joined Meta to work on AI chip architecture. Chip development is much more complicated than software. A product can take thousands of people and several years to go from kickoff to deployment. An architect needs to see the whole system and serve as a bridge between software and hardware. Broad technical knowledge is one part of the job. More importantly, you need to learn how to communicate with people from different fields.
 
-我深知努力并非是工作成功的充分条件，但总要在自己能控制的范围内做到最好。
+Because the work takes a great deal of experience, this is clearly not a field where you become a "chief scientist" at thirty and make a million dollars a year. On the other hand, you probably will not be pushed out at thirty-five just because of your age.
 
+A senior colleague described success at work along three dimensions. This is how I understand them:
 
-### 关于家庭
-2025年的另一大转变就是妻子辞掉国内的工作来美国了。结束了我们漫长的异地。这对我们来说都是困难的选择，但为了团聚，我们知道这是正确的决定。我们一起生活，维持这个家。她不仅擅长处理家中繁杂事务，让我们的小家井井有条，更是我任何事情的第一个分享对象，精神上的支柱。
+- **Get things done:** My strength. Deliver quickly and with high quality, and be willing to take on important, difficult work. Build a reputation as someone people can rely on.
+- **Work with people:** My weakness. Instead of exhausting myself trying to master office politics, I would rather be sincere and be myself. A senior colleague told me that being good with people gets you promoted faster, but being good at getting things done gives you more stability. At this point in my career, the latter is clearly more important.
+- **Figure out the direction:** The long-term goal. Understand why the work assigned to me matters. Understand what my manager needs, what the organization needs, and what the company needs. Pay attention to the roadmap, the latest industry developments, SOTA algorithms, and the chips that run them. This takes experience. It cannot be rushed.
 
-生活难免有摩擦，“丈夫”是我需要持续学习的一个角色。我意识到夫妻相处最不该有的心态是计较，“我做了多少，你怎么不做”。事实往往是对方也做了很多，而自己绝非完美。因此遇事不应责怪，而应关注如何共同解决。 
+I know that hard work is not sufficient for success, but I should still do the best I can within what I control.
 
-夫妻也是互相学习的对象。对于她来说，在美国重新发展职业是巨大的挑战。除了鼓励，我更应该通过自己认真生活、努力工作的状态去支持她：如果我能做到，她一定也能做到。
+### Family
 
+Another major change in 2025 was that my wife left her job in China and moved to the United States, ending our long period of living apart. It was a difficult decision for both of us, but we knew that being together was the right choice. We now share a home and build our life together. She handles the endless details of daily life and keeps our little home in order. More importantly, she is the first person I want to tell anything to, and the person I lean on most.
 
-### 关于生活
+Friction is unavoidable in a marriage, and being a "husband" is a role I need to keep learning. I have realized that the worst habit in a marriage is keeping score: "I did this much. Why didn't you do your part?" The truth is usually that the other person has also done a lot, and that I am far from perfect. When something goes wrong, the focus should not be on blame, but on how we solve it together.
 
-今年跑步只有1900多迈，3场全马，只有波马差强人意。无论数量还是质量都不够好。在生活变动后我一直没能恢复持续训练，总被各种有的没的打断。我发现在没有跑步日子，我的心情和效率都会受到影响。或许我应该更追求consistency，而不是单纯的量或者成绩。
+A marriage also means learning from each other. Rebuilding a career in the United States is a huge challenge for her. Beyond offering encouragement, I should support her through the way I approach my own life and work. If I can do it, she certainly can too.
 
-今年刷社媒的时间减少了很多，大多数时间都在和AI聊天。摆脱了为了组会和Paper学习的压力后，我久违地感受到了被好奇心驱动的快乐。毫不夸张地说，我现在比18岁时拥有更强的学习动力和能力。
+### Life
 
-我的生活仍处于巨大的不确定中，身份问题，职业规划，家庭未来。但在经历了今年的一切之后，我确信：
+I ran only a little over 1,900 miles this year and completed three marathons. Only Boston was barely acceptable. Neither the quantity nor the quality was good enough. After all the changes in my life, I never managed to return to consistent training. I was always interrupted by one thing or another. I have noticed that on days when I do not run, both my mood and my efficiency suffer. Perhaps I should care more about consistency than sheer volume or race results.
 
-> 一切发生的事情都是应该发生的。
+I also spent much less time on social media this year. Most of that time went to talking with AI instead. Once I was free from the pressure to study for group meetings and papers, I felt the joy of being driven by curiosity again. This is no exaggeration: I now have more motivation and a greater ability to learn than I did at eighteen.
 
-这个世界没有意外，但这就是它有趣的地方。
-- 遇见问题，分析问题，解决问题。
-- 理性，乐观，做我们能做的事，接受一切结果。
-- 关心具体的人和事。
-- 像保养一辆车一样保养自己：保持身体健康，体力充沛，大脑清醒。
-- 永远充满好奇心和探索精神。
+My life is still full of uncertainty: immigration status, career plans, and the future of my family. But after everything that happened this year, I am certain of one thing:
 
+> Everything that happens is supposed to happen.
 
-2026还有几个小时，但我已经迫不及待了。
+There are no accidents in this world, and that is exactly what makes it interesting.
+
+- Encounter the problem, analyze the problem, solve the problem.
+- Be rational and optimistic. Do what we can and accept every outcome.
+- Care about specific people and specific things.
+- Maintain myself like a car: stay healthy, energetic, and clear-minded.
+- Never lose curiosity or the spirit of exploration.
+
+There are still a few hours before 2026, but I already cannot wait.

@@ -3,15 +3,12 @@
 {{ .Content }}
 
 <ul>
-  {{ $oneYearAgo := now.AddDate -1 0 0 }}
-  {{ $pages := where .Site.RegularPages "Section" "blog" }}
+  {{ $pages := partial "all-blog-pages.html" . }}
   {{ range $pages }}
-    {{ if ge .Date $oneYearAgo }}
     <li>
       <span class="date">{{ .Date.Format "2006/01/02" }}</span>
       <a href="{{ .RelPermalink }}">{{ .Title | markdownify }}</a>
     </li>
-    {{ end }}
   {{ end }}
 </ul>
 

@@ -1,124 +1,126 @@
 ---
-title: 为什么我永远不会买个股
+title: "Why I Will Never Buy Individual Stocks"
 date: '2026-08-29'
 ---
 
-几年前，我来美国已经超过五年。博士毕业还遥遥无期，但在税务上我已经成为 resident，也开始认真考虑如何投资自己的积蓄。
+A few years ago, I had been in the United States for more than five years. Finishing my PhD was still nowhere in sight, but for tax purposes I had become a resident, and I started thinking seriously about how to invest my savings.
 
-也是在那个时候，我正在研究 reinforcement learning，无意中看到了 AlphaGo 的主要开发者之一 [Julian Schrittwieser](https://www.julian.ac/now/) 的个人主页。他[记录了自己的生活理念](https://www.julian.ac/live/)，其中关于投资的建议简单得近乎无聊：留出足够生活一段时间的现金，把十年内用不到的钱定期投入指数基金，永远不要买个股。他甚至专门做了一份 [slides](https://docs.google.com/presentation/d/1kWsyBIKy42H20LpaGU-E6n0GJGRrpCTukzlv6VQRRdI/edit?slide=id.p#slide=id.p) 来解释这件事。
+Around the same time, I was studying reinforcement learning and happened upon the personal website of [Julian Schrittwieser](https://www.julian.ac/now/), one of the main developers of AlphaGo. He had [written down his philosophy of life](https://www.julian.ac/live/), and his investment advice was almost boringly simple: keep enough cash to live on for a while, regularly invest any money you will not need for ten years in index funds, and never buy individual stocks. He even made a set of [slides](https://docs.google.com/presentation/d/1kWsyBIKy42H20LpaGU-E6n0GJGRrpCTukzlv6VQRRdI/edit?slide=id.p#slide=id.p) to explain it.
 
-我非常赞同，并给自己的投资设定了大概目标：
+That made perfect sense to me, so I set a few rough goals for my own investing:
 
-- 用尽可能少的精力控制风险；
-- 尽量减少税和费用；
-- 最后才是提高闲钱的回报：先跑赢通胀，再获得市场平均回报，不求超过市场平均。
+- Control risk with as little effort as possible.
+- Minimize taxes and fees.
+- Only then, improve the return on spare cash: first beat inflation, then earn the average market return, with no ambition to outperform it.
 
-这也成了我的投资方式，拿出闲钱定投指数基金。后来开始工作，公司 RSU 到账后，我也会第一时间全部卖掉，从不继续持有。
+That became my investment strategy: put spare money into index funds on a regular schedule. After I started working, I also sold all of my company RSUs as soon as they vested instead of holding on to them.
 
-但这几年，科技公司的股价涨得实在太多了。我周围不乏靠 NVIDIA、Micron 赚到很多钱的人，国内的亲戚朋友也一直有人炒 A 股。有时候我当然也会问自己：我是不是应该花一点时间研究个股？
+But technology stocks have risen so much over the past few years. I know plenty of people who made a great deal of money on NVIDIA and Micron, while relatives and friends in China have always traded A-shares. Naturally, I sometimes ask myself: should I spend a little time researching individual companies?
 
-我做 AI 芯片，也喜欢研究行业趋势。关于 AI Infra、半导体和 HBM 的需求，我敢说自己比绝大多数普通投资者理解得更深。既然别人靠这些股票赚到了钱，为什么我不能把专业知识也变成投资回报？
+I work on AI chips, and I enjoy studying industry trends. I would confidently say that I understand demand for AI infrastructure, semiconductors, and HBM better than the vast majority of retail investors. If other people have made money on these stocks, why can't I turn my professional knowledge into investment returns too?
 
-我认真想过以后，答案仍然是：我永远不会买个股。事实上，对于大多数人，我都不认为这是一件值得做的事。
+After thinking about it seriously, my answer is still the same: I will never buy individual stocks. In fact, for most people, I do not think it is worth doing at all.
 
 ## Everything Is Priced In
 
-我以前对股票市场的理解很简单：这里 noise 极大、信噪比极低，要靠收集信息判断趋势，是一件极其复杂又费力的事情。这个判断不能说错，但还不够深刻。它听起来好像只要收集足够多的信息、拥有足够专业的知识，就仍然可以战胜市场。
+My old understanding of the stock market was simple: it contains enormous noise and very little signal, so collecting information and using it to predict trends is extraordinarily complicated and exhausting. That was not wrong, but it was not deep enough. It still suggested that with enough information and enough expertise, one could beat the market.
 
-真正让我重新思考这个问题的，是 NVIDIA 和 TSMC 股价表现的巨大差距。
+What truly made me reconsider was the enormous difference between the stock performance of NVIDIA and TSMC.
 
-过去几年，NVIDIA 的上涨远远超过 TSMC。但如果只从供应链和技术壁垒来看，我很难解释这个结果。做 AI 需要 NVIDIA 的 GPU，但 GPU 至少还有 AMD，以及越来越多公司自己设计的 accelerator。无论谁设计芯片，最先进的产品最后大多仍然需要 TSMC 制造。NVIDIA 自己也离不开 TSMC。
+Over the past few years, NVIDIA has risen far more than TSMC. Yet if I look only at the supply chain and technical barriers, I find this hard to explain. AI requires NVIDIA GPUs, but at least AMD exists, and more companies are designing their own accelerators. No matter who designs the chip, most advanced products still need to be manufactured by TSMC. NVIDIA itself cannot do without TSMC.
 
-如果一定要在两家公司中选择一家更加不可替代的，我可能反而会选择 TSMC。那么为什么 NVIDIA 涨得更多？
+If I had to choose which of the two companies was harder to replace, I might actually choose TSMC. So why did NVIDIA rise more?
 
-我后来意识到，关键不在于 TSMC 是不是一家好公司，而在于大家是什么时候知道它是一家好公司。
+I eventually realized that the key question is not whether TSMC is a good company. It is when everyone learned that it was a good company.
 
-Intel 在先进制程上的落后并不是 ChatGPT 出现以后才发生的。GlobalFoundries 更是在[2018 年](https://investors.gf.com/news-releases/news-release-details/globalfoundries-reshapes-technology-portfolio-intensify-focus)就把 7nm 项目无限期搁置，退出了最先进制程的竞争。Apple 也早已把最先进的 A 系列芯片交给 TSMC 制造。远在 GenAI 成为投资主题以前，市场就知道 TSMC 技术领先、客户优质，而且先进制程几乎没有第二个选择。
+Intel did not fall behind in advanced process technology only after ChatGPT appeared. GlobalFoundries had already put its 7 nm program on indefinite hold and withdrawn from the leading-edge race in [2018](https://investors.gf.com/news-releases/news-release-details/globalfoundries-reshapes-technology-portfolio-intensify-focus). Apple had long entrusted its most advanced A-series chips to TSMC. Well before GenAI became an investment theme, the market knew that TSMC had leading technology, excellent customers, and almost no alternative at the most advanced nodes.
 
-ChatGPT 没有让 TSMC 突然成为一家好公司。它一直是一家好公司，而且所有人早就知道。
+ChatGPT did not suddenly make TSMC a good company. It had always been one, and everyone had known for a long time.
 
-这时我才真正理解 priced-in 的含义。
+That was when I finally understood what priced-in really means.
 
-股票回报并不取决于一家公司未来好不好，而取决于它的未来比当前价格里隐含的预期好多少。「先进芯片离不开 TSMC」可以解释它为什么有价值，却不能解释它为什么从今天开始应该比市场涨得更多。这些优势如果早已成为共识，也就早已进入了价格。
+Stock returns do not depend on whether a company will be good in the future. They depend on how much better its future will be than the expectations already embedded in today's price. "Advanced chips cannot exist without TSMC" explains why TSMC is valuable. It does not explain why the stock should outperform the market starting today. If those advantages are already part of the consensus, they are already in the price.
 
-我需要预测的并不只是未来。我还需要知道所有人已经怎样预测了未来，然后预测现实与这个共识之间的差。
+I do not merely need to predict the future. I need to know what future everyone else has already priced in, and then predict how reality will differ from that consensus.
 
-ASML 把这个问题推进了一层。它几乎垄断了 EUV 光刻机，技术壁垒可能比 TSMC 还要极端。按照最朴素的供应链分析，AI 需要先进芯片，先进芯片需要 EUV，全世界又只有 ASML 能制造 EUV，那么 ASML 理应是最大的受益者之一。可是在 GenAI 热潮最初几年，它的股价从 2021 年高位到 2024 年底几乎没有进展，远远落后于 NVIDIA。
+ASML takes the problem one level further. It has a near monopoly on EUV lithography systems, with a technical moat that may be even more extreme than TSMC's. The simplest supply-chain analysis goes like this: AI needs advanced chips; advanced chips need EUV; only ASML can build EUV systems; therefore ASML should be one of the largest beneficiaries. Yet during the first few years of the GenAI boom, its stock made almost no progress from its 2021 high through the end of 2024, dramatically underperforming NVIDIA.
 
-ASML 的垄断同样早已是公开信息，但这里还有另一层问题：技术上的 bottleneck 不等于利润增长最快的环节。从 AI demand 到 ASML 收入，中间还隔着 accelerator demand、先进制程 wafer demand、晶圆厂扩产和 lithography intensity。
+ASML's monopoly was also public knowledge. But there is another problem here: being the technical bottleneck does not mean being the part of the chain where profits grow fastest. Between AI demand and ASML revenue lie accelerator demand, advanced-node wafer demand, fab expansion, and lithography intensity.
 
-NVIDIA 可以直接从 GPU 的需求、售价和产品组合中获益。ASML 卖的却是可以使用很多年的资本设备。GPU 多卖十倍，不代表晶圆厂马上多买十倍 EUV。客户可以先提高设备利用率、升级现有机器，然后才会建设新的产能。「没有它就不行」和「它能拿走大部分新增利润」，从来不是同一句话。
+NVIDIA benefits directly from GPU demand, pricing, and product mix. ASML sells capital equipment that can operate for many years. Selling ten times as many GPUs does not mean fabs will immediately buy ten times as many EUV systems. Customers can first increase utilization, then upgrade existing machines, and only later build new capacity. "Nothing works without it" and "it captures most of the incremental profit" have never meant the same thing.
 
-更有趣的是，今年ASML又重新大涨。公司在 2026 年第二季度[提高了全年收入预期](https://www.asml.com/en/news/press-releases/2026/q2-2026-financial-results)，因为 AI 需求终于开始转化为客户更激进的扩产计划。ASML 并没有突然获得 EUV 垄断，它早就垄断了。真正改变的是市场对这份垄断能够多快转化为订单的估计。
+More interestingly, ASML has surged again this year. In the second quarter of 2026, the company [raised its full-year revenue outlook](https://www.asml.com/en/news/press-releases/2026/q2-2026-financial-results) because AI demand had finally begun to translate into more aggressive capacity plans from its customers. ASML did not suddenly acquire its EUV monopoly; it had held that monopoly all along. What changed was the market's estimate of how quickly the monopoly could turn into orders.
 
-Micron 又是另一个问题。我相当相信 HBM 的需求还会继续增长，但然后呢？这能告诉我 Micron 明年的股价吗？
+Micron presents yet another problem. I am quite confident that HBM demand will continue to grow. Then what? Does that tell me Micron's stock price next year?
 
-内存长期以来是一门周期性很强的生意。需求增加会带来涨价和利润，也会让厂家扩产，让客户调整采购，让更多投资者提前买入。即使我把未来的 HBM bit demand 预测得完全正确，我仍然需要知道市场原来预期多少、供给会怎样响应、价格能够维持多久，以及所有人会在什么时候改变判断。
+Memory has always been a highly cyclical business. Higher demand brings higher prices and profits, but it also leads manufacturers to expand capacity, customers to adjust purchasing, and more investors to buy in ahead of time. Even if I predict future HBM bit demand perfectly, I still need to know what the market has already priced in, how supply will respond, how long prices can hold, and when everyone else will change their minds.
 
-这不是一个 stationary distribution。当参与者都在观察和决策时，被观察的对象本身也在变化。一个能够赚钱的规律一旦被发现，就会吸引更多资金，直到不再有效。我们试图从历史中学习市场，市场也在学习我们。
+This is not a stationary distribution. When all the participants are observing and making decisions, the object being observed changes with them. Once a profitable pattern is discovered, it attracts more capital until it stops working. We try to learn the market from history, while the market is also learning us.
 
-专业知识可以帮助我理解产业、做好工作，却不能告诉我这些变化已经被价格吸收了多少。
+Professional knowledge can help me understand an industry and do my job well. It cannot tell me how much of that understanding has already been absorbed into the price.
 
-长期能够持续战胜大盘的基金只是少数，个股收益又集中在极少数超级赢家身上。指数不需要提前知道赢家是谁，而选股需要。问题是，在它们成为故事以前，我并不知道它们是谁。
+Only a small minority of funds beat the market over long periods, while the returns from individual stocks are concentrated in a tiny number of super-winners. An index does not need to know the winners in advance. Stock picking does. The problem is that before they become stories, I do not know who they are.
 
 ## Every Winning Bet Looks Like Skill
 
-既然选股如此困难，为什么还有那么多人乐此不疲？贪婪当然是一个答案，但我觉得还有一个更深的原因：人很难在钱和自我评价都卷入其中以后，继续长时间理性地思考。
+If stock picking is so difficult, why do so many people remain obsessed with it? Greed is certainly one answer, but I think there is a deeper reason: once both money and self-worth are involved, people find it very difficult to keep thinking rationally for long.
 
-人们买股票赚了钱，很自然地认为是自己判断准确；即使赚得比预想少，也只会懊恼为什么没有多投入一点，甚至没有加杠杆。可一旦亏钱，受到怀疑的往往不是方法，而是自己没有克服贪婪、恐惧，或者没有及时止损。
+When people make money on a stock, they naturally believe that their judgment was correct. Even if they earn less than they expected, they merely regret not investing more, perhaps even not using leverage. But when they lose money, they rarely question the method. Instead, they blame themselves for failing to overcome greed or fear, or for not cutting their losses quickly enough.
 
-所以「别人贪婪时我恐惧，别人恐惧时我贪婪」「股市是反人性的」，这些话在我听来都是 bullshit。赚钱证明方法正确，亏钱证明自己修炼不够。
+That is why phrases like "be fearful when others are greedy and greedy when others are fearful" or "the stock market goes against human nature" all sound like bullshit to me. If you make money, the method was right. If you lose money, you simply have not mastered yourself yet.
 
-这是一套无法证伪的系统。
+It is a system that cannot be falsified.
 
-对于大部分人而言，它和赌博没有区别。不是因为市场里不存在真正的 edge，而是太多的随机反馈被解释成能力。当一个赌徒连续掷出几个六以后，他开始相信自己找到了正确的手势，相信自己成为了赌神。
+For most people, it is no different from gambling. Not because there is no real edge in the market, but because too many random outcomes are mistaken for skill. A gambler rolls several sixes in a row and starts believing that he has found the correct wrist motion—that he has become the God of Gamblers.
 
-同时，选股提供的不只是收益，还有一种强烈的 intellectual validation：我比别人更早看懂了。当自己赚钱而别人亏损时，这种快乐甚至可能更强，因为它似乎不只证明自己有钱，还证明自己比别人聪明。指数投资偏偏不能提供这种快感。指数涨了，没有人能把功劳归给自己。
+Stock picking also provides more than returns. It offers a powerful form of intellectual validation: I understood this before everyone else. When I make money while others lose it, the pleasure may be even stronger, because it seems to prove not only that I have money, but that I am smarter. Index investing offers none of this satisfaction. When the index rises, no one can take personal credit.
 
-Leopold的故事是一个极端的例子。他绝顶聪明，对 AI Infrastructure 的许多长期判断也可能最终是正确的。他创立的 Situational Awareness 一度取得惊人的回报，随后却在今年 7 月单月下跌 67%，不得不把大部分公开股票组合卖给 Citadel 并解除杠杆。
+Leopold's story is an extreme example. He is exceptionally intelligent, and many of his long-term judgments about AI infrastructure may ultimately prove correct. His fund, Situational Awareness, once produced astonishing returns. Then it fell 67% in a single month this July, forcing him to sell most of the public-equity portfolio to Citadel and unwind the leverage.
 
-这个故事不能证明 Leopold 的行业判断是错的。它说明的是另一件事：巨大的成功会带来更大的资金、更强的确信，以及承担更大风险的许可。当仓位、杠杆和流动性都被放大以后，「长期方向正确」可能已经不够了。市场不需要证明你永远错误，只需要让你没有机会等到正确的那一天。
+The story does not prove that Leopold's industry judgment was wrong. It shows something else: enormous success brings more capital, greater conviction, and permission to take greater risks. Once position size, leverage, and liquidity are all magnified, being "right in the long run" may no longer be enough. The market does not have to prove that you are wrong forever. It only has to make sure you cannot survive until the day you are right.
 
-我坚信自己在许多事情上比大部分人聪明。我也知道，这种确信本身正是我最应该提防的人性。我不需要通过股价证明前一句，更不能忘记后一句。
+I firmly believe that I am smarter than most people at many things. I also know that this very conviction is exactly the part of human nature I should distrust most. I do not need a stock price to prove the first sentence, and I cannot afford to forget the second.
 
 ## Not Every Profit Is Worth Earning
 
-我对投资和经济发展有一个很朴素的理解：长期的经济增长最终来自生产力提高。我们发明更好的技术，用更少的资源生产更多东西，让更多人过上更好的生活，社会才真正变得更富有。
+My understanding of investing and economic development is rather simple: in the long run, economic growth ultimately comes from higher productivity. Society becomes genuinely wealthier when we invent better technology, produce more with fewer resources, and allow more people to live better lives.
 
-我崇尚技术进步，也因此一直对价值投资抱有好感。我希望自己的回报来自企业真正创造了新的价值。
+I admire technological progress, which is also why I have always found value investing appealing. I want my returns to come from companies genuinely creating new value.
 
-但据我观察，大多数人讨论炒股时并不是这样。他们当然也会说自己相信一家公司的长期价值，可是一旦讨论所谓的投资技术，问题最后总会变成：还有什么是市场没有发现的？我能不能比别人早一点买入？什么时候其他人会跟进？又怎样在别人卖掉以前先卖掉？
+But from what I have observed, that is not how most people talk about trading stocks. Of course they say that they believe in a company's long-term value. Yet as soon as the conversation turns to actual investing technique, the questions always become: what has the market not discovered yet? Can I buy before everyone else? When will other people follow? How can I sell before they do?
 
-说得直白一点，就是怎样确保自己不是最后一茬韭菜。
+To put it bluntly: how do I make sure I am not the last fool holding the bag?
 
-到这一步，回报就不再只是来自企业创造了多少价值，还来自我能不能猜中下一个人愿意用更高的价格接手。我的超额收益，依赖别人比我更晚发现、判断得比我更差，或者承担最后的损失。这不符合我的道德直觉。即使我真的比别人聪明，也不代表我愿意把这种聪明用来赚他们损失的钱。
+At that point, returns no longer come only from how much value a company creates. They also depend on whether I can correctly guess that the next person will pay a higher price. My excess return requires someone else to discover the information later, make a worse judgment, or absorb the final loss. That does not fit my moral intuition. Even if I really am smarter than other people, it does not mean I want to use that intelligence to profit from their losses.
 
-我无意对谁做道德审判。我不愿意这样赚钱，不代表我否认这种行为对市场有用。这是两个不同层次的问题。
+I have no intention of passing moral judgment on anyone. My unwillingness to make money this way does not mean that I deny its usefulness to the market. Those are two different questions.
 
-经济发展不只需要资本最终流向有生产力的地方，也需要这个过程足够快。新的信息要尽快反映进价格，需要退出的人要随时能够卖出，资本也要能够从前景变差的公司流向更有价值的地方。
+Economic development requires not only that capital eventually reach productive uses, but that it get there quickly. New information needs to be reflected in prices as soon as possible. People who want to exit need to be able to sell at any time. Capital needs to move from companies with declining prospects toward more valuable ones.
 
-投机者正是在做这件事。他们为了抢在别人以前买入和卖出，不断寻找新的信息，也不断把自己的判断放进价格。他们的交易提供流动性，让市场更快完成 price discovery。
+Speculators do exactly this. In their effort to buy and sell before everyone else, they constantly search for new information and put their judgments into the price. Their trades provide liquidity and help the market discover prices faster.
 
-但市场需要投机，不代表交易越多越好。Kenneth French 估算，1980 到 2006 年间，美国投资者平均每年花费相当于整个市场价值 0.67% 的费用和交易成本寻找超额回报。他把这看作社会为了 price discovery 支付的成本；对大多数投资者来说，转向被动投资反而可以提高回报。[The Cost of Active Investing](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=1105775)
+But the market's need for speculation does not mean that more trading is always better. Kenneth French estimated that between 1980 and 2006, American investors spent an average of 0.67% of the total value of the market each year on fees and trading costs in pursuit of excess returns. He described this as the social cost paid for price discovery; for most investors, moving to passive investing would actually improve returns. [The Cost of Active Investing](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=1105775)
 
-即使有一天我真的找到一个绝对可靠的 edge，如果它的前提是我比别人更早理解信息，并通过他们的判断失误获利，我也不愿意做。市场已经有足够多的人寻找这样的机会，并不差我一个。
+Even if I someday discover an absolutely reliable edge, if it requires me to understand information earlier than other people and profit from their mistakes, I still do not want it. The market already has enough people searching for such opportunities. It will not miss me.
 
 ## What Are You Optimizing For?
 
-在开始任何投资以前，也许都应该先问一个更基本的问题：我究竟是为了什么？
+Before making any investment, perhaps we should ask a more basic question: what exactly am I doing this for?
 
-如果是为了更多的钱，那么我要这些钱做什么，又准备怎样使用它？如果不是为了钱，而是享受研究带来的智力快感，或者价格涨跌带来的刺激，当然也可以。只是最好先对自己诚实，不要把一种昂贵的娱乐误认为理性的理财规划。
+If the answer is more money, what do I want that money for, and how do I plan to use it? If the point is not money, but the intellectual pleasure of research or the excitement of prices moving up and down, that is fine too. It is simply better to be honest with yourself instead of mistaking an expensive form of entertainment for a rational financial plan.
 
-我以前有一位年长的室友。他很早就买入不少 Tesla 股票，一度赚了很多钱。当时他还问过我要不要买，我没有买。后来他在一个相当不错的价位卖出，获得了许多人梦想中的投资结果。但故事并没有在卖出那天结束。后来他在网上遭遇情感诈骗，几乎失去了全部积蓄。第二年，他甚至拿不出卖出股票所需要缴纳的税款，还背上了贷款。
+I once had an older roommate. He bought a substantial amount of Tesla stock very early and, for a while, made a great deal of money. He asked whether I wanted to buy some too. I did not. Later, he sold at a very good price and achieved the sort of investment outcome many people dream of.
 
-这不是他的过错，也不是说如果一个人没有想清楚钱怎么花，就应该为受骗负责。它只是让我意识到，获得财富、保护财富和使用财富，是三种完全不同的能力。我们谈论投资时，常常把全部注意力放在第一种，仿佛账户里的数字到达某个高度，故事就已经有了幸福的结局。
+But the story did not end on the day he sold. Later, he fell victim to an online romance scam and lost nearly all of his savings. The following year, he could not even afford the taxes owed on the stock sale and had to take out loans.
 
-我们总在讨论投资的 ROI，却很少先想清楚 R 和 I 分别是什么。
+This was not his fault, nor does it mean that someone deserves to be scammed if they have not decided how to use their money. It simply made me realize that acquiring wealth, protecting wealth, and using wealth are three entirely different abilities. When we talk about investing, we often direct all our attention toward the first, as if the story has already reached a happy ending once the number in the account becomes large enough.
 
-如果 R 只是账户里的数字，那么数字本身并不能让生活变得更好。钱只有被用来换取安全、自由和具体的生活时才有意义。如果 I 只计算投入的本金，又会漏掉更重要的成本：研究股票花掉的时间、注意力，以及因此错过的其他事情。钱还有机会再赚，逝去的时间不会回来。
+We constantly discuss the ROI of an investment, but rarely begin by deciding what R and I actually mean.
 
-所以，选择什么样的投资，不能只比较哪一种收益率更高。先想清楚自己真正想要什么，又愿意为它付出什么，才可能做出更适合自己的选择。
+If the R is only a number in an account, the number itself cannot make life better. Money matters only when it buys security, freedom, and a better real life. If the I includes only the principal, it misses more important costs: the time and attention spent researching stocks, and everything else I gave up as a result. Money can be earned again. Lost time cannot.
 
-对我来说，相比研究哪只股票下个季度会涨，我更愿意把时间用来提高专业能力，或者陪伴家人。当然，我还是要感谢那些不停买科技股的人。他们对 AI 的热情让这个行业获得了更多资本，也让找到了一份收入还不错的工作。
+Choosing an investment, then, cannot be reduced to comparing which one has the higher rate of return. Only after understanding what you truly want, and what you are willing to pay for it, can you make a choice suited to your own life.
 
-也许炒股真的能让我赚到更多，也许不能，但这已经不重要了。Attention Is All You Need，而我的注意力应该留给更重要的事情。
+For me, instead of researching which stock will rise next quarter, I would rather spend the time improving at my work or being with my family. Of course, I should still thank everyone who keeps buying technology stocks. Their enthusiasm for AI has brought more capital into the field and helped me land a job that pays reasonably well.
+
+Maybe trading stocks really could make me more money. Maybe it could not. It no longer matters. Attention Is All You Need, and my attention belongs elsewhere.

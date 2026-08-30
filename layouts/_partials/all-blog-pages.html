@@ -1,0 +1,10 @@
+{{ $pages := slice }}
+{{ range .Sites }}
+  {{ $isDefaultLanguage := eq .Language.Lang "en" }}
+  {{ range where .RegularPages "Section" "blog" }}
+    {{ if or $isDefaultLanguage (not .IsTranslated) }}
+      {{ $pages = $pages | append . }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+{{ return (sort $pages "Date" "desc") }}
