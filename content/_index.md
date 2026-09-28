@@ -16,7 +16,7 @@ title: "Huwan Peng"
 
 ## About
 
-I'm an ASIC engineer on Meta's MTIA architecture team. I build performance models that help evaluate new hardware ideas before silicon exists and guide design decisions across ASIC programs.
+I'm an ASIC engineer on Meta's MTIA architecture team.
 
 **If compute buys intelligence, architecture sets the price.** I work to democratize intelligence by making every unit of compute count.
 
