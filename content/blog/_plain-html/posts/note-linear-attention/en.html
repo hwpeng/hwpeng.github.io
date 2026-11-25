@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Notes on Linear Attention</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <p><a href="../../index.html">Home</a></p>
+  <h1>Notes on Linear Attention</h1>
+  <p>2026-01-28</p>
+  <main>
+<p>These <a href="Linear_Attention.pdf">notes</a> introduce linear attention and its variants. We cover:</p>
+<ul>
+<li>How linear attention compresses key-value history into a fixed-size state, reducing complexity from <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝒪</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>L</mi><mn>2</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\mathcal{O}(L^2)</annotation></semantics></math> to <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝒪</mi><mo stretchy="false" form="prefix">(</mo><mi>L</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\mathcal{O}(L)</annotation></semantics></math>;</li>
+<li>The Delta Rule and gated variants for improved memory fidelity;</li>
+<li>Chunkwise algorithms that enable parallel training via the WY representation and UT transformation. Complete derivations and algorithms are provided.</li>
+</ul>
+  </main>
+</body>
+</html>

@@ -30,6 +30,9 @@ jobs:
       - name: Build
         run: hugo --minify
 
+      - name: Add plain HTML site
+        run: python3 content/blog/_plain-html/deploy.py
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
